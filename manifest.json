@@ -1,0 +1,14 @@
+{
+  "name": "Minimal Jira RTL",
+  "description": "Automatically aligns RTL text in Jira issue views.",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["https://*.atlassian.net/*"],
+      "js": ["jiraRTL.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": ["scripting"]
+}
