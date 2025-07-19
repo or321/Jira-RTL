@@ -1,0 +1,25 @@
+{
+  "name": "jira-rtl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jiraRTL.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"build": "vite build",
+	"build dev": "vite build --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/or321/Jira-RTL.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/or321/Jira-RTL/issues"
+  },
+  "homepage": "https://github.com/or321/Jira-RTL#readme",
+  "dependencies": {
+    "vite": "^7.0.5"
+  }
+}
