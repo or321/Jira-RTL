@@ -8,6 +8,8 @@ const observerConfig = {
 	subtree: true
 };
 
+const activeObservers = new Set();
+
 function applyScanners(parent, scanners) {
 	for (const scanner of scanners) {
 		if (typeof scanner === 'string') {
@@ -37,18 +39,25 @@ function scan() {
 
 		const observer = new MutationObserver(createObserverCallback(scanners));
 		observer.observe(target, observerConfig);
+		activeObservers.add(observer);
 
 		applyScanners(target, scanners);
 	}
 }
 
 function cleanup() {
+	for (const observer of activeObservers) {
+		observer.disconnect();
+	}
+	activeObservers.clear();
+
 	document.querySelectorAll('[data-rtl-applied="true"]').forEach(resetRTL);
 }
 
 window.onload = (event) => {
 	loadSettings((settings) => {
 		if (settings.enabled) {
+			console.log("JiraRTL - starting a new scan - page load");
 			scan();
 		}
 	});
@@ -60,9 +69,11 @@ browser.runtime.onMessage.addListener((msg) => {
 
 	switch (msg.type) {
 		case "JiraRTL_enable":
+			console.log("JiraRTL - starting a new scan");
 			scan();
 			break;
 		case "JiraRTL_disable":
+			console.log("JiraRTL - starting a cleanup");
 			cleanup();
 			break;
 	}
