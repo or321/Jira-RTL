@@ -11,7 +11,7 @@ function applyRTL(el) {
 	el.dataset.rtlApplied = "true";
 }
 
-function resetRTL(el) {
+export function resetRTL(el) {
 	el.style.direction = "";
 	el.style.textAlign = "";
 	el.dataset.rtlApplied = "";

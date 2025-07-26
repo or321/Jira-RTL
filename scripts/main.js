@@ -1,4 +1,6 @@
-import { setDirection } from "./rtl";
+import "./compatibility";
+import { loadSettings } from "./settings";
+import { setDirection, resetRTL } from "./rtl";
 import { scanTargets } from "./scan-targets";
 
 const observerConfig = {
@@ -40,8 +42,30 @@ function scan() {
 	}
 }
 
+function cleanup() {
+	document.querySelectorAll('[data-rtl-applied="true"]').forEach(resetRTL);
+}
+
 window.onload = (event) => {
-	scan();
+	loadSettings((settings) => {
+		if (settings.enabled) {
+			scan();
+		}
+	});
 };
+
+// Handle runtime messages
+browser.runtime.onMessage.addListener((msg) => {
+	if (msg.from !== "JiraRTL_popup") return;
+
+	switch (msg.type) {
+		case "JiraRTL_enable":
+			scan();
+			break;
+		case "JiraRTL_disable":
+			cleanup();
+			break;
+	}
+});
 
 console.log("JiraRTL finished initializing");
