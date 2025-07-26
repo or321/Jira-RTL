@@ -28,14 +28,20 @@ function createObserverCallback(scanners) {
 	};
 }
 
-for (const { getTarget, scanners } of scanTargets) {
-	const target = getTarget();
-	if (!target) continue;
+function scan() {
+	for (const { getTarget, scanners } of scanTargets) {
+		const target = getTarget();
+		if (!target) continue;
 
-	const observer = new MutationObserver(createObserverCallback(scanners));
-	observer.observe(target, observerConfig);
+		const observer = new MutationObserver(createObserverCallback(scanners));
+		observer.observe(target, observerConfig);
 
-	applyScanners(target, scanners);
+		applyScanners(target, scanners);
+	}
 }
+
+window.onload = (event) => {
+	scan();
+};
 
 console.log("JiraRTL finished initializing");
