@@ -6,11 +6,11 @@ export const scanTargets = [
 		scanners: [
 			'[data-testid="issue-field-summary.ui.issue-field-summary-inline-edit--container"]',
 
-			'[data-component-selector="jira-issue-view-rich-text-inline-edit-view-container"] p',
-			'[data-component-selector="jira-issue-view-rich-text-inline-edit-view-container"] li',
+			'[data-component-selector="jira-issue-view-rich-text-inline-edit-view-container"] .ak-renderer-document p',
+			'[data-component-selector="jira-issue-view-rich-text-inline-edit-view-container"] .ak-renderer-document li',
 
-			'[data-testid^="issue-comment-base.ui.comment.ak-comment."][data-testid$="-body"] p',
-			'[data-testid^="issue-comment-base.ui.comment.ak-comment."][data-testid$="-body"] li',
+			'[data-testid^="issue-comment-base.ui.comment.ak-comment."][data-testid$="-body"] .ak-renderer-document p',
+			'[data-testid^="issue-comment-base.ui.comment.ak-comment."][data-testid$="-body"] .ak-renderer-document li',
 		]
 	},
 
@@ -44,7 +44,9 @@ export const scanTargets = [
 		getTarget: () => document.body,
 		scanners: [
 			'[contenteditable="true"]',
-		]
+			'.ak-editor-content-area'
+		],
+		detectTextTyping: true
 	},
 
 	// Tooltips

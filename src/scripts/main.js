@@ -3,11 +3,6 @@ import { loadSettings } from "./settings";
 import { setDirection, resetRTL } from "./rtl";
 import { scanTargets } from "./scan-targets";
 
-const observerConfig = {
-	childList: true,
-	subtree: true
-};
-
 const activeObservers = new Set();
 
 function applyScanners(parent, scanners) {
@@ -20,26 +15,53 @@ function applyScanners(parent, scanners) {
 	}
 }
 
+function applyScannersToParent(node, scanners) {
+	for (const scanner of scanners) {
+		const el = node.closest(scanner);
+		if (el) {
+			setDirection(el);
+		}
+	}
+}
+
 function createObserverCallback(scanners) {
 	return function (mutationsList) {
 		for (const mutation of mutationsList) {
-			for (const node of mutation.addedNodes) {
+			//console.log("mutation:", mutation);
+
+			if (mutation.type === "childList") {
+				for (const node of mutation.addedNodes) {
+					if (!(node instanceof HTMLElement)) continue;
+
+					applyScanners(node, scanners);
+				}
+			}
+
+			if (mutation.type === "characterData") {
+				const node = mutation.target.parentNode;
 				if (!(node instanceof HTMLElement)) continue;
-				
-				console.log("applying scanners");
-				applyScanners(node, scanners);
+
+				applyScannersToParent(node, scanners);
 			}
 		}
 	};
 }
 
 function scan() {
-	for (const { getTarget, scanners } of scanTargets) {
+	for (const { getTarget, scanners, detectTextTyping } of scanTargets) {
 		const target = getTarget();
 		if (!target) continue;
 
 		const observer = new MutationObserver(createObserverCallback(scanners));
+
+		const observerConfig = {
+			childList: true,
+			subtree: true,
+			characterData: !!detectTextTyping
+		};
+
 		observer.observe(target, observerConfig);
+
 		activeObservers.add(observer);
 
 		applyScanners(target, scanners);
