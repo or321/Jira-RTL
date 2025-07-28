@@ -5,8 +5,8 @@
   "main": "jiraRTL.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	"build": "vite build",
-	"build-dev": "vite build --watch"
+    "build": "vite build",
+    "build-dev": "vite build --watch"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/or321/Jira-RTL#readme",
   "dependencies": {
-    "vite": "^7.0.5"
+    "vite": "^7.0.5",
+    "vite-plugin-static-copy": "^3.1.1"
   }
 }

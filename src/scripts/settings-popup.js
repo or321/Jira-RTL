@@ -3,7 +3,7 @@ const DEFAULT_SETTINGS = {
 };
 
 export function loadSettings(callback) {
-	browser.storage.sync.get(["JiraRTL_settings"], (result) => {
+	chrome.storage.sync.get(["JiraRTL_settings"], (result) => {
 		const settings = Object.assign({}, DEFAULT_SETTINGS, result.JiraRTL_settings);
 		callback(settings);
 	});

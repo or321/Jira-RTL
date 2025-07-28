@@ -1,4 +1,4 @@
-import "./compatibility";
+//import "./compatibility";
 import { loadSettings } from "./settings";
 import { setDirection, resetRTL } from "./rtl";
 import { scanTargets } from "./scan-targets";
@@ -25,7 +25,8 @@ function createObserverCallback(scanners) {
 		for (const mutation of mutationsList) {
 			for (const node of mutation.addedNodes) {
 				if (!(node instanceof HTMLElement)) continue;
-
+				
+				console.log("applying scanners");
 				applyScanners(node, scanners);
 			}
 		}
@@ -56,6 +57,7 @@ function cleanup() {
 
 window.onload = (event) => {
 	loadSettings((settings) => {
+		console.log("initial settings:", settings);
 		if (settings.enabled) {
 			console.log("JiraRTL - starting a new scan - page load");
 			scan();
@@ -64,7 +66,7 @@ window.onload = (event) => {
 };
 
 // Handle runtime messages
-browser.runtime.onMessage.addListener((msg) => {
+chrome.runtime.onMessage.addListener((msg) => {
 	if (msg.from !== "JiraRTL_popup") return;
 
 	switch (msg.type) {
