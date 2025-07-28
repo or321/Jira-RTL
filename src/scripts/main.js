@@ -1,9 +1,10 @@
 //import "./compatibility";
 import { loadSettings } from "./settings";
 import { setDirection, resetRTL } from "./rtl";
-import { scanTargets } from "./scan-targets";
+import { scanTargets, editableInputTargets } from "./scan-targets";
 
 const activeObservers = new Set();
+const activeInputListeners = new Map();
 
 function applyScanners(parent, scanners) {
 	for (const scanner of scanners) {
@@ -55,8 +56,8 @@ function scan() {
 		const observer = new MutationObserver(createObserverCallback(scanners));
 
 		const observerConfig = {
-			childList: true,
 			subtree: true,
+			childList: !detectTextTyping,
 			characterData: !!detectTextTyping
 		};
 
@@ -66,13 +67,35 @@ function scan() {
 
 		applyScanners(target, scanners);
 	}
+
+	// Attach input handlers
+	for (const inputTarget of editableInputTargets) {
+		document.querySelectorAll(inputTarget).forEach((inputEl) => {
+			if (activeInputListeners.has(inputEl)) return; // already attached
+
+			const inputHandler = (event) => {
+				setDirection(event.target);
+			};
+
+			inputEl.addEventListener('input', inputHandler);
+			activeInputListeners.set(inputEl, inputHandler);
+		});
+
+	}
 }
 
 function cleanup() {
+	// Detach observers
 	for (const observer of activeObservers) {
 		observer.disconnect();
 	}
 	activeObservers.clear();
+
+	// Detach input handlers
+	for (const [el, handler] of activeInputListeners.entries()) {
+		el.removeEventListener('input', handler);
+	}
+	activeInputListeners.clear();
 
 	document.querySelectorAll('[data-rtl-applied="true"]').forEach(resetRTL);
 }

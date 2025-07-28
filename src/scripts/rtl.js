@@ -18,10 +18,28 @@ export function resetRTL(el) {
 }
 
 export function setDirection(el) {
-	if (el && !el.dataset.rtlApplied && isRTL(el.innerText)) {
+	if (!el) {
+		return;
+	}
+
+	if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+		setInputDirection(el);
+		return;
+	}
+
+	if (!el.dataset.rtlApplied && isRTL(el.innerText)) {
 		applyRTL(el);
 	}
-	else if (el && el.dataset.rtlApplied && !isRTL(el.innerText)) {
+	else if (el.dataset.rtlApplied && !isRTL(el.innerText)) {
+		resetRTL(el)
+	}
+}
+
+function setInputDirection(el) {
+	if (!el.dataset.rtlApplied && isRTL(el.value)) {
+		applyRTL(el);
+	}
+	else if (el.dataset.rtlApplied && !isRTL(el.value)) {
 		resetRTL(el)
 	}
 }

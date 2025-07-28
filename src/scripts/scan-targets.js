@@ -20,7 +20,7 @@ export const scanTargets = [
 		getTarget: () => document.body,
 		//getTarget: () => document.querySelector('[data-testid="issue.views.issue-details.issue-modal.modal-dialog"]'),
 		scanners: [
-			'[data-testid="issue-field-summary.ui.issue-field-summary-inline-edit--container"]',	
+			'[data-testid="issue-field-summary.ui.issue-field-summary-inline-edit--container"]',
 			
 			'[data-component-selector="jira-issue-view-rich-text-inline-edit-view-container"] p',
 			'[data-component-selector="jira-issue-view-rich-text-inline-edit-view-container"] li',
@@ -39,15 +39,17 @@ export const scanTargets = [
 		]
 	},
 
-	// Editing any input field
+	
+	// Editing fields with content editor
 	{
 		getTarget: () => document.body,
 		scanners: [
 			'[contenteditable="true"]',
-			'.ak-editor-content-area'
+			'.ak-editor-content-area',
 		],
 		detectTextTyping: true
 	},
+	
 
 	// Tooltips
 	{
@@ -59,3 +61,7 @@ export const scanTargets = [
 	}
 ];
 
+export const editableInputTargets = [
+	'#summary-field',
+	'[data-testid="issue.views.issue-base.foundation.summary.heading.writeable"] textarea',
+]
