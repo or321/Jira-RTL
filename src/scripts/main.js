@@ -5,10 +5,17 @@ import { scanTargets } from "./scan-targets";
 
 const activeObservers = new Set();
 
-function applyScanners(parent, scanners) {
+function applyScanners(parent, scanners, applyRtlOnParent) {
 	for (const scanner of scanners) {
 		if (typeof scanner === 'string') {
-			parent.querySelectorAll?.(scanner).forEach(setDirection);
+			parent.querySelectorAll?.(scanner).forEach((el) => {
+				if (applyRtlOnParent) {
+					setDirection(el.parentNode);
+				}
+				else {
+					setDirection(el);
+				}
+			});
 		} else if (typeof scanner === 'function') {
 			scanner().forEach(setDirection);
 		}
@@ -24,7 +31,7 @@ function applyScannersToParent(node, scanners) {
 	}
 }
 
-function createObserverCallback(scanners) {
+function createObserverCallback(scanners, applyRtlOnParent) {
 	return function (mutationsList) {
 		for (const mutation of mutationsList) {
 			//console.log("mutation:", mutation);
@@ -33,7 +40,7 @@ function createObserverCallback(scanners) {
 				for (const node of mutation.addedNodes) {
 					if (!(node instanceof HTMLElement)) continue;
 
-					applyScanners(node, scanners);
+					applyScanners(node, scanners, applyRtlOnParent);
 				}
 			}
 
@@ -48,11 +55,12 @@ function createObserverCallback(scanners) {
 }
 
 function scan() {
-	for (const { getTarget, scanners, detectTextTyping } of scanTargets) {
+	for (const { getTarget, scanners, detectTextTyping, applyRtlOnParent } of scanTargets) {
 		const target = getTarget();
+		console.log("Target: ", target);
 		if (!target) continue;
 
-		const observer = new MutationObserver(createObserverCallback(scanners));
+		const observer = new MutationObserver(createObserverCallback(scanners, applyRtlOnParent));
 
 		const observerConfig = {
 			childList: true,
@@ -64,7 +72,22 @@ function scan() {
 
 		activeObservers.add(observer);
 
-		applyScanners(target, scanners);
+		applyScanners(target, scanners, applyRtlOnParent);
+	}
+
+	// Attach input handlers
+	for (const inputTarget of editableInputTargets) {
+		document.querySelectorAll(inputTarget).forEach((inputEl) => {
+			if (activeInputListeners.has(inputEl)) return; // already attached
+
+			const inputHandler = (event) => {
+				setDirection(event.target);
+			};
+
+			inputEl.addEventListener('input', inputHandler);
+			activeInputListeners.set(inputEl, inputHandler);
+		});
+
 	}
 }
 

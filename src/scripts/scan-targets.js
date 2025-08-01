@@ -39,7 +39,17 @@ export const scanTargets = [
 		]
 	},
 
-	// Editing any input field
+	// Issues in filter view
+	{
+		getTarget: () => document.body,
+		//getTarget: () => document.querySelector('table[data-vc="issue-table"]'),
+		scanners: [
+			'[data-testid="native-issue-table.common.ui.issue-cells.issue-summary.issue-summary-cell"]',
+		],
+		applyRtlOnParent: true
+	},
+	
+	// Editing fields with content editor
 	{
 		getTarget: () => document.body,
 		scanners: [
