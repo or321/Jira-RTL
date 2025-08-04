@@ -1,3 +1,5 @@
+// This file should be identical to /src/popup/settings-popup.js
+
 const DEFAULT_SETTINGS = {
 	enabled: true
 };

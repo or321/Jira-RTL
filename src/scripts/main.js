@@ -1,9 +1,17 @@
-//import "./compatibility";
 import { loadSettings } from "./settings";
-import { setDirection, resetRTL } from "./rtl";
-import { scanTargets } from "./scan-targets";
+import { setDirection, removeRTL, JIRA_RTL_APPLIED_CLASS } from "./rtl";
+import { rtlObserver } from "./rtlObserver"
+import "../styles/rtl.css"
+//import { observerRules, combinedSelector } from "./observerRules";
 
 const activeObservers = new Set();
+
+function injectRTLStylesheet() {
+	const link = document.createElement('link');
+	link.rel = 'stylesheet';
+	link.href = chrome.runtime.getURL('assets/main.css');
+	document.head.appendChild(link);
+}
 
 function applyScanners(parent, scanners) {
 	for (const scanner of scanners) {
@@ -48,7 +56,7 @@ function createObserverCallback(scanners) {
 }
 
 function scan() {
-	for (const { getTarget, scanners, detectTextTyping } of scanTargets) {
+	for (const { getTarget, scanners, detectTextTyping } of observerRules) {
 		const target = getTarget();
 		if (!target) continue;
 
@@ -74,15 +82,18 @@ function cleanup() {
 	}
 	activeObservers.clear();
 
-	document.querySelectorAll('[data-rtl-applied="true"]').forEach(resetRTL);
+	document.querySelectorAll(`.${JIRA_RTL_APPLIED_CLASS}`).forEach(removeRTL);
 }
 
 window.onload = (event) => {
+	injectRTLStylesheet();
+
 	loadSettings((settings) => {
 		console.log("initial settings:", settings);
 		if (settings.enabled) {
 			console.log("JiraRTL - starting a new scan - page load");
-			scan();
+			rtlObserver.initialize();
+			//scan();
 		}
 	});
 };
@@ -94,11 +105,11 @@ chrome.runtime.onMessage.addListener((msg) => {
 	switch (msg.type) {
 		case "JiraRTL_enable":
 			console.log("JiraRTL - starting a new scan");
-			scan();
+			rtlObserver.initialize();
 			break;
 		case "JiraRTL_disable":
 			console.log("JiraRTL - starting a cleanup");
-			cleanup();
+			rtlObserver.cleanup();
 			break;
 	}
 });

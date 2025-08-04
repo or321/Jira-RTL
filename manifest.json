@@ -6,16 +6,28 @@
 	"action": {
 		"default_popup": "popup.html"
 	},
-	
 	"content_scripts": [
 		{
 			"matches": [
 				"https://*.atlassian.net/*"
 			],
 			"js": [
-				"main.js"
+				"assets/main.js"
 			]
 		}
 	],
-	"permissions": ["storage", "activeTab"]
+	"web_accessible_resources": [
+		{
+			"matches": [
+				"https://*.atlassian.net/*"
+			],
+			"resources": [
+				"assets/main.css"
+			]
+		}
+	],
+	"permissions": [
+		"storage",
+		"activeTab"
+	]
 }

@@ -1,5 +1,4 @@
-//import "../scripts/compatibility";
-import { loadSettings } from "../scripts/settings-popup";
+import { loadSettings } from "./settings-popup";
 
 // Loading settings
 

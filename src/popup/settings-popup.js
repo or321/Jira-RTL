@@ -1,3 +1,5 @@
+// This file should be identical to /src/scripts/settings.js
+
 const DEFAULT_SETTINGS = {
 	enabled: true
 };
