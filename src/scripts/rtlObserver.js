@@ -25,7 +25,7 @@ function processCreatedNode(node) {
 
 function processTextMutation(el) {
 	if (!el) return;
-	
+
 	let parentEl = el.parentElement;
 
 	while (parentEl) {
@@ -47,7 +47,6 @@ function processTextMutation(el) {
 
 function handleMutations(mutations) {
 	for (const mutation of mutations) {
-		console.log(mutation);
 		if (mutation.type === 'childList') {
 			mutation.addedNodes.forEach(node => {
 				if (!(node instanceof Element || node instanceof Text)) return;
@@ -56,7 +55,7 @@ function handleMutations(mutations) {
 					processCreatedNode(node);
 				}
 				else if (node instanceof Text) {
-					processTextMutation(node.parentElement);
+					processTextMutation(node);
 				}
 			});
 		}
@@ -84,7 +83,6 @@ function processElement(el, observerRule) {
 			if (activeInputListeners.has(el)) return; // already attached
 
 			const inputHandler = (event) => {
-				console.log("input changed", event.target, observerRule.resolveText(event.target));
 				setDirection(event.target, observerRule.resolveText(event.target));
 			};
 
