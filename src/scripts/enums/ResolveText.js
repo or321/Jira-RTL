@@ -17,5 +17,5 @@ export const ResolveText = {
 	 * @param {HTMLElement} el
 	 * @returns {string}
 	 */
-	VALUE: el => el.VALUE
+	VALUE: el => el.value
 };
