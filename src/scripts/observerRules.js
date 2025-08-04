@@ -36,7 +36,7 @@ export const observerRules = [
 			'table[data-vc="issue-table"] [data-testid="native-issue-table.common.ui.issue-cells.issue-summary.issue-summary-cell"]'
 		],
 		behavior: Behavior.DEFAULT,
-		resolveTarget: ResolveTarget.PARENT,
+		resolveTarget: el => el.closest('[data-testid="issue-field-inline-edit-read-view-container.ui.container"]'),
 		resolveText: ResolveText.INNER_TEXT
 	},
 
