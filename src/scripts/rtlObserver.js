@@ -1,4 +1,4 @@
-import { setDirection, removeRTL, JIRA_RTL_APPLIED_CLASS } from "./rtl";
+import { setDirection, removeRTL, JIRA_RTL_APPLIED_SELECTOR } from "./rtl";
 import { observerRules, combinedSelector } from './observerRules';
 import { Behavior } from "./enums/Behavior";
 
@@ -135,7 +135,7 @@ function cleanup() {
 	}
 	activeInputListeners.clear();
 
-	document.querySelectorAll(`.${JIRA_RTL_APPLIED_CLASS}`).forEach(removeRTL);
+	document.querySelectorAll(JIRA_RTL_APPLIED_SELECTOR).forEach(removeRTL);
 }
 
 export const rtlObserver = {
