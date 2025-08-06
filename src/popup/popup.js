@@ -13,14 +13,14 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("enabledToggle").addEventListener("change", (e) => {
 	loadSettings((settings) => {
 		settings.enabled = e.target.checked;
-		chrome.storage.sync.set({ JiraRTL_settings: settings });
+		chrome.storage.sync.set({ Jira_RTL_settings: settings });
 
 		// Notify all Jira tabs
 		chrome.tabs.query({ url: "*://*.atlassian.net/*" }, (tabs) => {
 			for (const tab of tabs) {
 				chrome.tabs.sendMessage(tab.id, {
-					from: "JiraRTL_popup",
-					type: settings.enabled ? "JiraRTL_enable" : "JiraRTL_disable"
+					from: "Jira_RTL_popup",
+					type: settings.enabled ? "Jira_RTL_enable" : "Jira_RTL_disable"
 				});
 			}
 		});

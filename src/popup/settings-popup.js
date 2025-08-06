@@ -5,8 +5,8 @@ const DEFAULT_SETTINGS = {
 };
 
 export function loadSettings(callback) {
-	chrome.storage.sync.get(["JiraRTL_settings"], (result) => {
-		const settings = Object.assign({}, DEFAULT_SETTINGS, result.JiraRTL_settings);
+	chrome.storage.sync.get(["Jira_RTL_settings"], (result) => {
+		const settings = Object.assign({}, DEFAULT_SETTINGS, result.Jira_RTL_settings);
 		callback(settings);
 	});
 }
