@@ -103,7 +103,7 @@ function initialize() {
 	if (observer) return; // already initialized
 
 	observer = new MutationObserver((mutations) => {
-		requestIdleCallback(() => handleMutations(mutations));
+		setTimeout(() => handleMutations(mutations), 0);
 	});
 
 	observer.observe(document.body, {
@@ -113,14 +113,14 @@ function initialize() {
 	});
 
 	// Initial pass for existing nodes
-	requestIdleCallback(() => {
+	setTimeout(() => {
 		observerRules.forEach((observerRule) => {
 			observerRule.selectors.forEach(selector => {
 				document.querySelectorAll(selector).forEach(el =>
 					processElement(el, observerRule));
 			});
 		});
-	});
+	}, 0);
 }
 
 function cleanup() {
