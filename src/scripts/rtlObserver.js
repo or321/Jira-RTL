@@ -99,6 +99,17 @@ function processElement(el, observerRule) {
 	}
 }
 
+function runScan() {
+	setTimeout(() => {
+		observerRules.forEach((observerRule) => {
+			observerRule.selectors.forEach(selector => {
+				document.querySelectorAll(selector).forEach(el =>
+					processElement(el, observerRule));
+			});
+		});
+	}, 0);
+}
+
 function initialize() {
 	if (observer) return; // already initialized
 
@@ -113,14 +124,7 @@ function initialize() {
 	});
 
 	// Initial pass for existing nodes
-	setTimeout(() => {
-		observerRules.forEach((observerRule) => {
-			observerRule.selectors.forEach(selector => {
-				document.querySelectorAll(selector).forEach(el =>
-					processElement(el, observerRule));
-			});
-		});
-	}, 0);
+	runScan();
 }
 
 function cleanup() {
@@ -141,4 +145,5 @@ function cleanup() {
 export const rtlObserver = {
 	initialize,
 	cleanup,
+	runScan,
 };

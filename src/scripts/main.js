@@ -22,10 +22,22 @@ runWhenReady(() => {
 	injectRTLStylesheet();
 	loadSettings((settings) => {
 		if (settings.enabled) {
-			console.log("Jira-RTL - starting initial scan");
+			console.log("Jira-RTL - running initial scan");
 			rtlObserver.initialize();
 		}
 	});
+});
+
+// run a post-load scan in case the first initial scan missed something
+window.addEventListener("load", () => {
+    setTimeout(() => {
+		loadSettings((settings) => {
+			if (settings.enabled) {
+				console.log("Jira-RTL - running a post-load scan");
+				rtlObserver.runScan();
+			}
+		});
+    }, 4000); 
 });
 
 // Handle runtime messages
