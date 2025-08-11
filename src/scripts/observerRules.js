@@ -31,9 +31,20 @@ export const observerRules = [
 			// Issue description inside an issue-relationship table
 			'[data-testid="issue-field-summary.ui.inline-read.link-item--primitive--container"]',
 
-			// Content inside an issue hover-card
-			'[data-testid="hover-card"] [data-smart-element="Title"]',
-			'[data-testid="hover-card"] [data-testid="smart-element-text"]',
+			// Recent work items in a user profile view
+			'[data-testid="profile-work-list"] li[data-testid="work-item"]',
+
+			// Items in the "your-work" page (accessible by clicking on the "For you" option in the main menu)
+			'[id^="your-work-page-tabs"] [data-test-id^="global-pages.home.ui.tab-container.tab.item-list.item-link"]',
+
+			// Items in the "recent items" modal dialog
+			'[id=":rm:"] [role="listitem"] span',
+
+			// Items in the "starred items" modal dialog
+			'[id=":ro:"] [role="listitem"] span',
+
+			// Issues table inside dashboard gadgets
+			'.search-results-dashboard-item-issue-table table.issue-table td.summary',
 
 			// Tooltips
 			'.atlaskit-portal-container [role="tooltip"]',
@@ -73,6 +84,36 @@ export const observerRules = [
 		resolveText: ResolveText.INNER_TEXT
 	},
 
+	/* Title of issue in a hover-card */
+	{
+		selectors: [
+			'[data-testid="hover-card"] [data-smart-element="Title"]'
+		],
+		behavior: Behavior.DEFAULT,
+		resolveTarget: el => el.closest('[data-testid="smart-element-group"]'),
+		resolveText: ResolveText.INNER_TEXT
+	},
+
+	/* Description of issue in a hover-card */
+	{
+		selectors: [
+			'[data-testid="hover-card"] [data-testid="smart-element-text"]'
+		],
+		behavior: Behavior.DEFAULT,
+		resolveTarget: ResolveTarget.PARENT,
+		resolveText: ResolveText.INNER_TEXT
+	},
+
+	/* Issues in the "Work" page of a user */
+	{
+		selectors: [
+			'[data-testid="recent-work-component"] [data-testid="objectName"]'
+		],
+		behavior: Behavior.DEFAULT,
+		resolveTarget: ResolveTarget.PARENT,
+		resolveText: ResolveText.INNER_TEXT
+	},
+
 	/* Editable Fields with content editor */
 	{
 		selectors: [
@@ -98,6 +139,15 @@ export const observerRules = [
 
 			// The main search input at the top of the page
 			'input[data-test-id="search-dialog-input"]',
+
+			// Filter field in the "Work" page of a user
+			'[data-testid="recent-work-component"] [data-testid="recent-work_search-input"]',
+
+			// Filter field in "recent items" modal dialog
+			'[id=":rm:"] input',
+
+			// Filter field in "starred items" modal dialog
+			'[id=":ro:"] input',
 		],
 		behavior: Behavior.INPUT,
 		resolveTarget: ResolveTarget.SELF,

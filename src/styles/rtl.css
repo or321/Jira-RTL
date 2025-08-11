@@ -13,7 +13,24 @@
 		unicode-bidi: embed;
 	}
 
-	input[data-test-id="search-dialog-input"]& {
+	/* Preserve LTR direction inside "mention" blocks */
+	[data-testid="mention-with-profilecard-trigger"],
+	.mentionView-content-wrap {
+		direction: ltr;
+		unicode-bidi: embed;
+	}
+
+	/* Spacing for input fields after changing their direction */
+	input&[data-test-id="search-dialog-input"] ,
+	[data-testid="recent-work-component"] &[data-testid="recent-work_search-input"] {
 		padding-right: 2rem;
+	}
+
+	/* In some tabs of "Your work" page, align the issue status to the left to simulate the original layout */
+	#your-work-page-tabs-0-tab &[data-test-id^="global-pages.home.ui.tab-container.tab.item-list.item-link"] > span:nth-of-type(2) ,
+	#your-work-page-tabs-2-tab &[data-test-id^="global-pages.home.ui.tab-container.tab.item-list.item-link"] > span:nth-of-type(2) {
+		direction: ltr;
+		text-align: left;
+		padding-left: var(--ds-space-200, 16px);
 	}
 }
