@@ -13,7 +13,7 @@ export default defineConfig({
 				entryFileNames: chunk => {
 					switch (chunk.name) {
 						case "main":
-							return "assets/[name].js";
+							return "assets/jira-rtl.js";
 
 						default:
 							return "assets/[name].[hash].js";
@@ -22,7 +22,7 @@ export default defineConfig({
 				// 👇 Control CSS asset file names
 				assetFileNames: assetInfo => {
 					if (assetInfo.name === 'main.css') {
-						return 'assets/main.css';
+						return 'assets/jira-rtl.css';
 					}
 					return 'assets/[name].[hash][extname]';
 				}

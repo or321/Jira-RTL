@@ -5,7 +5,7 @@ import "../styles/rtl.css"
 function injectRTLStylesheet() {
 	const link = document.createElement('link');
 	link.rel = 'stylesheet';
-	link.href = chrome.runtime.getURL('assets/main.css');
+	link.href = chrome.runtime.getURL('assets/jira-rtl.css');
 	document.head.appendChild(link);
 }
 

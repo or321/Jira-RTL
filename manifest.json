@@ -12,7 +12,7 @@
 				"https://*.atlassian.net/*"
 			],
 			"js": [
-				"assets/main.js"
+				"assets/jira-rtl.js"
 			],
 			"run_at": "document_start"
 		}
@@ -23,7 +23,7 @@
 				"https://*.atlassian.net/*"
 			],
 			"resources": [
-				"assets/main.css"
+				"assets/jira-rtl.css"
 			]
 		}
 	],
