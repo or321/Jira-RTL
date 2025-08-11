@@ -1,4 +1,19 @@
 [data-jira-rtl-applied="true"] {
-	direction: rtl;
-	text-align: right;
+	direction: rtl !important;
+	text-align: right !important;
+
+	/* Preserve LTR direction inside <code> blocks */
+	.code-block {
+		direction: ltr;
+		text-align: left;
+	}
+
+	code, .code {
+		direction: ltr;
+		unicode-bidi: embed;
+	}
+
+	input[data-test-id="search-dialog-input"]& {
+		padding-right: 2rem;
+	}
 }
