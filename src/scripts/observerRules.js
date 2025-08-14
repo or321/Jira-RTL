@@ -37,14 +37,11 @@ export const observerRules = [
 			// Items in the "your-work" page (accessible by clicking on the "For you" option in the main menu)
 			'[id^="your-work-page-tabs"] [data-test-id^="global-pages.home.ui.tab-container.tab.item-list.item-link"]',
 
-			// Items in the "recent items" modal dialog
-			'[id=":rm:"] [role="listitem"] span',
-
-			// Items in the "starred items" modal dialog
-			'[id=":ro:"] [role="listitem"] span',
-
 			// Issues table inside dashboard gadgets
 			'.search-results-dashboard-item-issue-table table.issue-table td.summary',
+
+			// Items in sidebar modal dialogs
+			'.atlaskit-portal-container span',
 
 			// Tooltips
 			'.atlaskit-portal-container [role="tooltip"]',
@@ -143,11 +140,8 @@ export const observerRules = [
 			// Filter field in the "Work" page of a user
 			'[data-testid="recent-work-component"] [data-testid="recent-work_search-input"]',
 
-			// Filter field in "recent items" modal dialog
-			'[id=":rm:"] input',
-
-			// Filter field in "starred items" modal dialog
-			'[id=":ro:"] input',
+			// Filter fields in sidebar modal dialogs
+			'.atlaskit-portal-container input[data-ds--text-field--input="true"]',
 		],
 		behavior: Behavior.INPUT,
 		resolveTarget: ResolveTarget.SELF,
