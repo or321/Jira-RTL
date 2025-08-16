@@ -1,7 +1,7 @@
 {
 	"name": "Jira RTL",
 	"description": "Automatically aligns RTL text in Jira.",
-	"version": "0.4.4",
+	"version": "0.5",
 	"manifest_version": 3,
 	"action": {
 		"default_popup": "popup.html"
@@ -12,6 +12,7 @@
 				"https://*.atlassian.net/*"
 			],
 			"js": [
+				"assets/browser-polyfill.min.js",
 				"assets/jira-rtl.js"
 			],
 			"run_at": "document_start"

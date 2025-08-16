@@ -21,6 +21,7 @@
   "homepage": "https://github.com/or321/Jira-RTL#readme",
   "dependencies": {
     "vite": "^7.0.5",
-    "vite-plugin-static-copy": "^3.1.1"
+    "vite-plugin-static-copy": "^3.1.1",
+    "webextension-polyfill": "^0.12.0"
   }
 }

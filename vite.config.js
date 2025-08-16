@@ -35,10 +35,8 @@ export default defineConfig({
 	plugins: [
 		viteStaticCopy({
 			targets: [
-				{
-					src: 'manifest.json',
-					dest: '.'
-				}
+				{ src: 'manifest.json', dest: '.' },
+				{ src: 'node_modules/webextension-polyfill/dist/browser-polyfill.min.js', dest: 'assets' }
 			]
 		})
 	]
