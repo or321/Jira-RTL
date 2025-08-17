@@ -1,4 +1,4 @@
-import { loadSettings, saveSettings } from "./settings-popup";
+import { loadSettings, saveSettings } from "../scripts/settings";
 
 // Loading settings
 
