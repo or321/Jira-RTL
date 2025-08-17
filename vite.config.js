@@ -8,7 +8,7 @@ const contentConfig = {
 		emptyOutDir: true, // only the first build empties the output folder
 		target: 'es2020',
 		rollupOptions: {
-			input: resolve(__dirname, 'src/scripts/main.js'),
+			input: resolve(__dirname, 'src/content/main.js'),
 			output: {
 				inlineDynamicImports: true,
 				entryFileNames: 'assets/jira-rtl.js',

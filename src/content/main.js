@@ -1,4 +1,4 @@
-import { loadSettings, DEFAULT_SETTINGS } from "./settings";
+import { loadSettings, DEFAULT_SETTINGS } from "../utils/settings";
 import { rtlObserver } from "./rtlObserver"
 import "../styles/rtl.css"
 

@@ -1,4 +1,4 @@
-import { loadSettings, saveSettings } from "../scripts/settings";
+import { loadSettings, saveSettings } from "../utils/settings";
 
 // Loading settings
 
