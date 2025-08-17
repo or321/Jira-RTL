@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import path from 'path';
+import fs from 'fs';
 
 const contentConfig = {
 	build: {
@@ -18,7 +20,7 @@ const contentConfig = {
 						return 'assets/jira-rtl.css';
 					}
 					return 'assets/[name].[hash][extname]';
-				}
+				},
 			},
 		},
 	},
@@ -57,9 +59,19 @@ const popupConfig = {
 				{
 					filename: 'popup.html',
 					template: 'src/popup/popup.html'
+				},
+			],
+		}),
+		{
+			name: 'remove-dist-src-folder',
+			// closeBundle hook: Runs after Vite finished everything
+			closeBundle: () => {
+				const folder = path.resolve(__dirname, 'dist/src');
+				if (fs.existsSync(folder)) {
+					fs.rmSync(folder, { recursive: true, force: true });
 				}
-			]
-		})
+			},
+		},
 	],
 };
 
