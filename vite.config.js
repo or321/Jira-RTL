@@ -1,9 +1,6 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
-import { createHtmlPlugin } from 'vite-plugin-html';
-import path from 'path';
-import fs from 'fs';
 
 const contentConfig = {
 	build: {
@@ -40,7 +37,7 @@ const popupConfig = {
 		emptyOutDir: false, // The output folder is already emptied in the first config
 		target: 'es2020',
 		rollupOptions: {
-			input: resolve(__dirname, 'src/popup/popup.html'),
+			input: resolve(__dirname, 'popup.html'),
 			output: {
 				entryFileNames: 'assets/[name].js',
 				chunkFileNames: 'assets/[name].js',
@@ -48,31 +45,6 @@ const popupConfig = {
 			},
 		},
 	},
-	plugins: [
-		viteStaticCopy({
-			targets: [
-				{ src: 'src/popup/popup.html', dest: '.' },
-			],
-		}),
-		createHtmlPlugin({
-			pages: [
-				{
-					filename: 'popup.html',
-					template: 'src/popup/popup.html'
-				},
-			],
-		}),
-		{
-			name: 'remove-dist-src-folder',
-			// closeBundle hook: Runs after Vite finished everything
-			closeBundle: () => {
-				const folder = path.resolve(__dirname, 'dist/src');
-				if (fs.existsSync(folder)) {
-					fs.rmSync(folder, { recursive: true, force: true });
-				}
-			},
-		},
-	],
 };
 
 // Apply mode with: "vite build --mode {parameter}"
