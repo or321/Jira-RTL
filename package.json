@@ -5,9 +5,10 @@
   "main": "jiraRTL.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:content": "vite build --mode content",
+    "zip-dist": "node zip-dist.js",
+	"build:content": "vite build --mode content",
     "build:popup": "vite build --mode popup",
-    "build": "npm-run-all build:content build:popup",
+    "build": "npm-run-all build:content build:popup zip-dist",
     "dev:content": "vite build --watch --mode content",
     "dev:popup": "vite build --watch --mode popup",
     "dev": "npm-run-all dev:content dev:popup"
@@ -30,5 +31,8 @@
     "vite-plugin-html": "^3.2.2",
     "vite-plugin-static-copy": "^3.1.1",
     "webextension-polyfill": "^0.12.0"
+  },
+  "devDependencies": {
+    "archiver": "^7.0.1"
   }
 }
