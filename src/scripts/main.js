@@ -43,13 +43,14 @@ async function applySettings(settings) {
 		}
 	}
 
-	currentSettings = settings;
+	currentSettings = structuredClone(settings);
 }
 
 async function initialize() {
 	injectRTLStylesheet();
 	let settings = await loadSettings();
-	currentSettings = settings;
+
+	currentSettings = structuredClone(settings);
 
 	if (settings.enabled) {
 		console.log("Jira_RTL - running initial scan");
