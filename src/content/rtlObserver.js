@@ -1,4 +1,4 @@
-import { setDirection, removeRTL, JIRA_RTL_APPLIED_SELECTOR } from "./rtl";
+import { setDirection, removeRTL, JIRA_RTL_APPLIED_SELECTOR } from "./rtlUtils";
 import { observerRules, combinedSelector } from './observerRules';
 import { Behavior } from "./enums/Behavior";
 
