@@ -41,7 +41,7 @@ export const observerRules = [
 			'.search-results-dashboard-item-issue-table table.issue-table td.summary',
 
 			// Items in sidebar modal dialogs
-			'.atlaskit-portal-container span',
+			'.atlaskit-portal-container [id^=":r"][data-ds--level="1"] span',
 
 			// Tooltips
 			'.atlaskit-portal-container [role="tooltip"]',
@@ -141,7 +141,7 @@ export const observerRules = [
 			'[data-testid="recent-work-component"] [data-testid="recent-work_search-input"]',
 
 			// Filter fields in sidebar modal dialogs
-			'.atlaskit-portal-container input[data-ds--text-field--input="true"]',
+			'.atlaskit-portal-container [id^=":r"][data-ds--level="1"] input[data-ds--text-field--input="true"]',
 		],
 		behavior: Behavior.INPUT,
 		resolveTarget: ResolveTarget.SELF,

@@ -47,6 +47,8 @@ function processTextMutation(el) {
 
 function handleMutations(mutations) {
 	for (const mutation of mutations) {
+		//console.log(mutation);
+
 		if (mutation.type === 'childList') {
 			mutation.addedNodes.forEach(node => {
 				if (!(node instanceof Element || node instanceof Text)) return;
