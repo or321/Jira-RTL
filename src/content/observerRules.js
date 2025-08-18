@@ -114,8 +114,7 @@ export const observerRules = [
 	/* Editable Fields with content editor */
 	{
 		selectors: [
-			'[contenteditable="true"]',
-			'.ak-editor-content-area',
+			'[id="ak-editor-textarea"][contenteditable="true"]',
 		],
 		behavior: Behavior.CONTENT_EDITABLE,
 		resolveTarget: ResolveTarget.SELF,
