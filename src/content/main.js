@@ -48,7 +48,7 @@ async function applySettings(settings) {
 
 async function initialize() {
 	injectRTLStylesheet();
-	let settings = await loadSettings();
+	const settings = await loadSettings();
 
 	currentSettings = structuredClone(settings);
 
@@ -73,17 +73,14 @@ window.addEventListener("load", () => {
 });
 
 // Listen for storage changes
-browser.storage.onChanged.addListener((changes, area) => {
+browser.storage.onChanged.addListener(async (changes, area) => {
 	// Ensure the storage changes came from the Jira-RTL extension only
 	if (area !== "sync") return;
 	if (!changes.Jira_RTL_settings) return;
 	
-	const newSettings = {
-		...DEFAULT_SETTINGS,
-		...(changes.Jira_RTL_settings.newValue || {}),
-	};
+	const settings = await loadSettings();
 
-	applySettings(newSettings);
+	applySettings(settings);
 });
 
 console.log("Jira_RTL extension loaded");
