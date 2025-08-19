@@ -92,4 +92,12 @@
 			transform: scaleX(-1);
 		}
 	}
+
+	/* Changing layout of action items inside an editable element with text editor */
+	& [data-task-list-local-id],
+	&[data-task-list-local-id] {
+		& [data-component="placeholder"] {
+			margin: 0 calc(var(--ds-space-100, 8px) * 3) 0 0 !important;
+		}
+	}
 }

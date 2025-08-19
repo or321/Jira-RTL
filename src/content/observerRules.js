@@ -19,6 +19,9 @@ export const observerRules = [
 			'.ak-renderer-document p',
 			'.ak-renderer-document li',
 
+			// Action items inside an editable element (in view mode)
+			'.ak-renderer-document [data-task-list-local-id]',
+
 			// Cards in Sprint or Kanban board view
 			'[data-component-selector="platform-card.ui.card.card-content.content-section"]',
 
