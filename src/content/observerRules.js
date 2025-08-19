@@ -67,7 +67,8 @@ export const observerRules = [
 	/* List view - issues summary */
 	{
 		selectors: [
-			'[data-testid="business-list.ui.list-view.base-table.base-table-with-analytics"] [data-testid="business-list.ui.list-view.summary-cell"]'
+			'[data-testid="business-list.ui.list-view.base-table.base-table-with-analytics"] [data-testid="business-list.ui.list-view.summary-cell"]',
+			'[data-testid="business-list.ui.list-view.base-table.base-table-with-analytics"] [data-testid="smart-element-link"]'
 		],
 		behavior: Behavior.DEFAULT,
 		resolveTarget: el => el.closest('[data-testid="business-list.ui.list-view.text-cell.text-cell-wrapper"]'),
