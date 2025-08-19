@@ -46,7 +46,7 @@ export const observerRules = [
 			// Items in sidebar modal dialogs
 			'.atlaskit-portal-container [id^=":r"][data-ds--level="1"] span',
 
-			// Epics names inside "epic buttons" (component is called epic-lozenge)
+			// Epics names inside "lozenge components"
 			'[data-testid="issue-field-parent-switcher.common.ui.epic-lozenge.lozenge--text"]',
 
 			// Tooltips
