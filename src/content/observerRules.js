@@ -51,7 +51,7 @@ export const observerRules = [
 		],
 		behavior: Behavior.DEFAULT,
 		resolveTarget: ResolveTarget.SELF,
-		resolveText: ResolveText.INNER_TEXT
+		resolveText: ResolveText.TEXT_CONTENT
 	},
 
 	/* Issues filter view - issues summary */
@@ -61,7 +61,7 @@ export const observerRules = [
 		],
 		behavior: Behavior.DEFAULT,
 		resolveTarget: el => el.closest('[data-testid="issue-field-inline-edit-read-view-container.ui.container"]'),
-		resolveText: ResolveText.INNER_TEXT
+		resolveText: ResolveText.TEXT_CONTENT
 	},
 
 	/* List view - issues summary */
@@ -72,7 +72,7 @@ export const observerRules = [
 		],
 		behavior: Behavior.DEFAULT,
 		resolveTarget: el => el.closest('[data-testid="business-list.ui.list-view.text-cell.text-cell-wrapper"]'),
-		resolveText: ResolveText.INNER_TEXT
+		resolveText: ResolveText.TEXT_CONTENT
 	},
 
 	/* Backlog view - issues summary */
@@ -82,7 +82,7 @@ export const observerRules = [
 		],
 		behavior: Behavior.DEFAULT,
 		resolveTarget: ResolveTarget.PARENT,
-		resolveText: ResolveText.INNER_TEXT
+		resolveText: ResolveText.TEXT_CONTENT
 	},
 
 	/* Timeline view - epics titles */
@@ -92,7 +92,7 @@ export const observerRules = [
 		],
 		behavior: Behavior.DEFAULT,
 		resolveTarget: ResolveTarget.PARENT,
-		resolveText: ResolveText.INNER_TEXT
+		resolveText: ResolveText.TEXT_CONTENT
 	},
 
 	/* Header of an issue-relationship table */
@@ -102,7 +102,7 @@ export const observerRules = [
 		],
 		behavior: Behavior.DEFAULT,
 		resolveTarget: ResolveTarget.PARENT,
-		resolveText: ResolveText.INNER_TEXT
+		resolveText: ResolveText.TEXT_CONTENT
 	},
 
 	/* Title of issues in the modal dialog of search results */
@@ -112,7 +112,7 @@ export const observerRules = [
 		],
 		behavior: Behavior.DEFAULT,
 		resolveTarget: ResolveTarget.PARENT,
-		resolveText: ResolveText.INNER_TEXT
+		resolveText: ResolveText.TEXT_CONTENT
 	},
 
 	/* Title of issue in a hover-card */
@@ -122,7 +122,7 @@ export const observerRules = [
 		],
 		behavior: Behavior.DEFAULT,
 		resolveTarget: el => el.closest('[data-testid="smart-element-group"]'),
-		resolveText: ResolveText.INNER_TEXT
+		resolveText: ResolveText.TEXT_CONTENT
 	},
 
 	/* Description of issue in a hover-card */
@@ -132,7 +132,7 @@ export const observerRules = [
 		],
 		behavior: Behavior.DEFAULT,
 		resolveTarget: ResolveTarget.PARENT,
-		resolveText: ResolveText.INNER_TEXT
+		resolveText: ResolveText.TEXT_CONTENT
 	},
 
 	/* Issues in the "Work" page of a user */
@@ -142,7 +142,7 @@ export const observerRules = [
 		],
 		behavior: Behavior.DEFAULT,
 		resolveTarget: ResolveTarget.PARENT,
-		resolveText: ResolveText.INNER_TEXT
+		resolveText: ResolveText.TEXT_CONTENT
 	},
 
 	/* Editable Fields with content editor */

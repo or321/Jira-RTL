@@ -81,4 +81,15 @@
 			margin: 0 calc(var(--ds-space-100, 8px) * 3.5) 0 0 !important;
 		}
 	}
+
+	/* Changing layout of "expand" elements when combined with RTL */
+	& [data-node-type="expand"],
+	[data-node-type="expand"]:has(&) {
+		direction: rtl;
+
+		/* Flipping the geometry of the caret icon in the expand title */
+		& span[role="img"] {
+			transform: scaleX(-1);
+		}
+	}
 }

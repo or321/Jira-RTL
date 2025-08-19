@@ -6,11 +6,11 @@
  */
 export const ResolveText = {
 	/**
-	 * Text content is the element inner text
+	 * Text content is determined by the element "textContent" property - which includes hidden text nodes as well
 	 * @param {HTMLElement} el
 	 * @returns {string}
 	 */
-	INNER_TEXT: el => el.innerText,
+	TEXT_CONTENT: el => el.textContent,
 
 	/**
 	 * Text content is the element value
