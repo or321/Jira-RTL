@@ -41,7 +41,7 @@
 		width: 100%;
 	}
 
-	/* Changing layout of <blockquote> elements combined with RTL - swapping exist rules between left and right */
+	/* Changing layout of <blockquote> elements when combined with RTL - swapping exist rules between left and right */
 	& blockquote,
 	blockquote:has(&) {
 		padding-right: var(--ds-space-200, 16px);
@@ -50,17 +50,16 @@
 		border-left: unset !important;
 	}
 
-	/* Changing layout of editor-panel elements combined with RTL - swapping exist rules between left and right */
+	/* Changing layout of editor-panel elements when combined with RTL - swapping exist rules between left and right */
 	& .ak-editor-panel,
 	.ak-editor-panel:has(&) {
 		direction: rtl;
 		padding-right: var(--ds-space-100, 8px);
 		padding-left: var(--ds-space-200, 16px);
-	}
 
-		& .ak-editor-panel .ak-editor-panel__icon,
-		.ak-editor-panel:has(&) .ak-editor-panel__icon {
+		& .ak-editor-panel__icon {
 			padding-right: unset !important;
 			padding-left: var(--ds-space-100, 8px);
 		}
+	}
 }
