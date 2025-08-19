@@ -29,8 +29,8 @@
 	}
 
 	/* In some tabs of "Your work" page, align the issue status to the left to simulate the original layout */
-	#your-work-page-tabs-0-tab &[data-test-id^="global-pages.home.ui.tab-container.tab.item-list.item-link"] > span:nth-of-type(2) ,
-	#your-work-page-tabs-2-tab &[data-test-id^="global-pages.home.ui.tab-container.tab.item-list.item-link"] > span:nth-of-type(2) {
+	#your-work-page-tabs-0-tab &[data-test-id^="global-pages.home.ui.tab-container.tab.item-list.item-link"]>span:nth-of-type(2),
+	#your-work-page-tabs-2-tab &[data-test-id^="global-pages.home.ui.tab-container.tab.item-list.item-link"]>span:nth-of-type(2) {
 		direction: ltr;
 		text-align: left;
 		padding-left: var(--ds-space-200, 16px);
@@ -39,5 +39,14 @@
 	/* Expanding the container of epics titles in timeline view, so the text content will align to the right */
 	&:has([data-testid="roadmap.timeline-table-kit.ui.list-item-content.summary.title"]) {
 		width: 100%;
+	}
+
+	/* Changing layout of <blockquote> elements combined with RTL */
+	& blockquote,
+	blockquote:has(&) {
+		padding-right: var(--ds-space-200, 16px);
+		padding-left: unset !important;
+		border-right: 2px solid var(--ds-border, var(--ds-border, #091E4224));
+		border-left: unset !important;
 	}
 }
