@@ -118,7 +118,7 @@ export const observerRules = [
 		],
 		behavior: Behavior.CONTENT_EDITABLE,
 		resolveTarget: ResolveTarget.SELF,
-		resolveText: ResolveText.INNER_TEXT
+		resolveText: el => ResolveText.TREE_WALKER(el)
 	},
 
 	/* Input fields */
