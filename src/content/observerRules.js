@@ -74,11 +74,20 @@ export const observerRules = [
 		resolveText: ResolveText.INNER_TEXT
 	},
 
-	
 	/* Backlog view - issues summary */
 	{
 		selectors: [
 			'[data-testid^="software-backlog.card-list.id"] [data-testid="software-backlog.card-list.card.card-contents.summary"]'
+		],
+		behavior: Behavior.DEFAULT,
+		resolveTarget: ResolveTarget.PARENT,
+		resolveText: ResolveText.INNER_TEXT
+	},
+
+	/* Timeline view - epics titles */
+	{
+		selectors: [
+			'[data-testid="sr-timeline"] [data-testid="roadmap.timeline-table-kit.ui.list-item-content.summary.title"]'
 		],
 		behavior: Behavior.DEFAULT,
 		resolveTarget: ResolveTarget.PARENT,

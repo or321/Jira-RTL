@@ -2,26 +2,28 @@
 	direction: rtl !important;
 	text-align: right !important;
 
-	/* Preserve LTR direction inside <code> blocks */
-	.code-block {
+	/* Preserve layout of code blocks */
+	& .code-block {
 		direction: ltr;
 		text-align: left;
 	}
 
-	code, .code {
+	/* Preserve LTR direction inside <code> elements */
+	& code,
+	& .code {
 		direction: ltr;
 		unicode-bidi: embed;
 	}
 
 	/* Preserve LTR direction inside "mention" blocks */
-	[data-testid="mention-with-profilecard-trigger"],
-	.mentionView-content-wrap {
+	& [data-testid="mention-with-profilecard-trigger"],
+	& .mentionView-content-wrap {
 		direction: ltr;
 		unicode-bidi: embed;
 	}
 
 	/* Spacing for input fields after changing their direction */
-	input&[data-test-id="search-dialog-input"] ,
+	input&[data-test-id="search-dialog-input"],
 	[data-testid="recent-work-component"] &[data-testid="recent-work_search-input"] {
 		padding-right: 2rem;
 	}
@@ -32,5 +34,10 @@
 		direction: ltr;
 		text-align: left;
 		padding-left: var(--ds-space-200, 16px);
+	}
+
+	/* Expanding the container of epics titles in timeline view, so the text content will align to the right */
+	&:has([data-testid="roadmap.timeline-table-kit.ui.list-item-content.summary.title"]) {
+		width: 100%;
 	}
 }
