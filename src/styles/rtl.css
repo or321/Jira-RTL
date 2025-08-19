@@ -100,4 +100,9 @@
 			margin: 0 calc(var(--ds-space-100, 8px) * 3) 0 0 !important;
 		}
 	}
+
+	/* Changing layout of tables inside editable elements with text editor, when combined with RTL */
+	table[data-testid="renderer-table"]:has(&){
+		direction: rtl;
+	}
 }
