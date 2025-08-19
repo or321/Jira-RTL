@@ -11,7 +11,7 @@ export const observerRules = [
 	/* Simple elements where RTL is applied directly */
 	{
 		selectors: [
-			// Issue view - the issue summary
+			// Issues summary in issue view
 			'[data-testid="issue-field-summary.ui.issue-field-summary-inline-edit--container"]',
 
 			// Elements which on click turn to editable with the Jira text editor.
@@ -43,6 +43,9 @@ export const observerRules = [
 			// Items in sidebar modal dialogs
 			'.atlaskit-portal-container [id^=":r"][data-ds--level="1"] span',
 
+			// Epics names inside "epic buttons" (component is called epic-lozenge)
+			'[data-testid="issue-field-parent-switcher.common.ui.epic-lozenge.lozenge--text"]',
+
 			// Tooltips
 			'.atlaskit-portal-container [role="tooltip"]',
 		],
@@ -51,13 +54,34 @@ export const observerRules = [
 		resolveText: ResolveText.INNER_TEXT
 	},
 
-	/* Issues table view - the cells containing the issues summary */
+	/* Issues filter view - issues summary */
 	{
 		selectors: [
 			'table[data-vc="issue-table"] [data-testid="native-issue-table.common.ui.issue-cells.issue-summary.issue-summary-cell"]'
 		],
 		behavior: Behavior.DEFAULT,
 		resolveTarget: el => el.closest('[data-testid="issue-field-inline-edit-read-view-container.ui.container"]'),
+		resolveText: ResolveText.INNER_TEXT
+	},
+
+	/* List view - issues summary */
+	{
+		selectors: [
+			'[data-testid="business-list.ui.list-view.base-table.base-table-with-analytics"] [data-testid="business-list.ui.list-view.summary-cell"]'
+		],
+		behavior: Behavior.DEFAULT,
+		resolveTarget: el => el.closest('[data-testid="business-list.ui.list-view.text-cell.text-cell-wrapper"]'),
+		resolveText: ResolveText.INNER_TEXT
+	},
+
+	
+	/* Backlog view - issues summary */
+	{
+		selectors: [
+			'[data-testid^="software-backlog.card-list.id"] [data-testid="software-backlog.card-list.card.card-contents.summary"]'
+		],
+		behavior: Behavior.DEFAULT,
+		resolveTarget: ResolveTarget.PARENT,
 		resolveText: ResolveText.INNER_TEXT
 	},
 
