@@ -49,6 +49,12 @@ export const observerRules = [
 			// Epics names inside "lozenge components"
 			'[data-testid="issue-field-parent-switcher.common.ui.epic-lozenge.lozenge--text"]',
 
+			// Filter names in "all filters" page
+			'[data-test-id="global-pages.directories.directory-base.content.table.container"] table[aria-label="Filters details"] td:has(a[href^="/issues/?filter="])',
+
+			// Dashboard names in "all dashboards" page
+			'[data-test-id="global-pages.directories.directory-base.content.table.container"] table[aria-label="Dashboards details"] td:has(a[href^="/jira/dashboards/"])',
+
 			// Tooltips
 			'.atlaskit-portal-container [role="tooltip"]',
 		],
