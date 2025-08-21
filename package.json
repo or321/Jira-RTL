@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "jira-rtl",
   "version": "1.0.0",
   "description": "",

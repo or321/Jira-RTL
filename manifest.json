@@ -1,7 +1,7 @@
 {
 	"name": "Jira RTL",
 	"description": "Automatically aligns RTL text in Jira.",
-	"version": "0.5.3",
+	"version": "0.5.4",
 	"manifest_version": 3,
 	"action": {
 		"default_popup": "popup.html"
