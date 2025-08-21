@@ -103,11 +103,13 @@ function processElement(el, observerRule) {
 
 function runScan() {
 	setTimeout(() => {
-		observerRules.forEach((observerRule) => {
-			observerRule.selectors.forEach(selector => {
-				document.querySelectorAll(selector).forEach(el =>
-					processElement(el, observerRule));
-			});
+		document.querySelectorAll(combinedSelector).forEach(el => {
+			for (const observerRule of observerRules) {
+				if (el.matches(observerRule.compiledSelector)) {
+					processElement(el, observerRule);
+					break;
+				}
+			}
 		});
 	}, 0);
 }
