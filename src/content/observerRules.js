@@ -22,8 +22,11 @@ export const observerRules = [
 			// Action items inside an editable element (in view mode)
 			'.ak-renderer-document [data-task-list-local-id]',
 
-			// Cards in Sprint or Kanban board view
+			// Cards content in Sprint or Kanban board view
 			'[data-component-selector="platform-card.ui.card.card-content.content-section"]',
+
+			// Cards group headers in Sprint or Kanban board view
+			'[data-testid="software-board.board-container.board.card-group.card-group-header"] :nth-child(2)',
 
 			// Versions/releases table view
 			'[data-testid="project-directories.versions.main.table.table-container"] table > tbody > tr > td',
