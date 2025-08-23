@@ -1,9 +1,18 @@
 {
 	"name": "Jira RTL",
-	"description": "Automatically aligns RTL text in Jira.",
+	"description": "Automatically aligns RTL text in Atlassian Jira.",
 	"version": "0.5.5",
 	"manifest_version": 3,
+	"icons": {
+		"16": "icons/icon-16-black.png",
+		"48": "icons/icon-48-black.png",
+		"128": "icons/icon-128-black.png"
+	},
 	"action": {
+		"default_icon": {
+			"16": "icons/icon-16-black.png",
+			"48": "icons/icon-48-black.png"
+		},
 		"default_popup": "popup.html"
 	},
 	"content_scripts": [
@@ -29,7 +38,6 @@
 		}
 	],
 	"permissions": [
-		"storage",
-		"activeTab"
+		"storage"
 	]
 }
