@@ -58,6 +58,9 @@ export const observerRules = [
 			// Dashboard names in "all dashboards" page
 			'[data-test-id="global-pages.directories.directory-base.content.table.container"] table[aria-label="Dashboards details"] td:has(a[href^="/jira/dashboards/"])',
 
+			// Attachments headers
+			'[data-testid="issue-view-base.content.attachment.grid-view.ui.components.media-card.title-box-header"]',
+
 			// Tooltips
 			'.atlaskit-portal-container [role="tooltip"]',
 		],
