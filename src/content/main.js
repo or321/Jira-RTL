@@ -2,8 +2,13 @@ import { loadSettings, DEFAULT_SETTINGS } from "../utils/settings";
 import { rtlObserver } from "./rtlObserver"
 import "../styles/rtl.css"
 
+/** @type {import("../utils/settings").ExtensionSettings | null} */
 let currentSettings = null;
 
+/**
+ * Injects the extension stylesheet into the document head, 
+ * to apply custom styles on elements with RTL applied.
+ */
 function injectRTLStylesheet() {
 	const link = document.createElement('link');
 	link.rel = 'stylesheet';
@@ -11,6 +16,12 @@ function injectRTLStylesheet() {
 	document.head.appendChild(link);
 }
 
+/**
+ * Runs a callback when the DOM is ready.
+ * If the document is already loaded, the callback runs immediately.
+ *
+ * @param {() => void} callback - Function to run once DOM is ready.
+ */
 function runWhenReady(callback) {
 	if (document.readyState === "loading") {
 		document.addEventListener("DOMContentLoaded", callback);
@@ -20,7 +31,12 @@ function runWhenReady(callback) {
 	}
 }
 
-// Handlers for individual settings
+/**
+ * A map of setting keys to their change-handlers.
+ * Each handler is called when its respective setting changes.
+ *
+ * @type {Record<string, (newValue: any, oldValue: any) => void>}
+ */
 const settingHandlers = {
 	enabled: (newValue, oldValue) => {
 		if (newValue === oldValue) return;
@@ -36,6 +52,12 @@ const settingHandlers = {
 	},
 };
 
+/**
+ * Applies settings by running change-handlers
+ * for any modified setting value, and update current settings.
+ *
+ * @param {import("../utils/settings").ExtensionSettings} settings - The new settings object.
+ */
 async function applySettings(settings) {
 	for (const key of Object.keys(settings)) {
 		if (settingHandlers[key]) {
@@ -46,6 +68,12 @@ async function applySettings(settings) {
 	currentSettings = structuredClone(settings);
 }
 
+/**
+ * Initializes the extension:
+ * - Injects stylesheet
+ * - Loads settings
+ * - Starts observer if the extension is enabled
+ */
 async function initialize() {
 	injectRTLStylesheet();
 	const settings = await loadSettings();
@@ -72,7 +100,10 @@ window.addEventListener("load", () => {
 	}, 4000);
 });
 
-// Listen for storage changes
+/**
+ * Listen for storage changes and re-apply settings
+ * if the Jira-RTL sync storage key was updated.
+ */
 browser.storage.onChanged.addListener(async (changes, area) => {
 	// Ensure the storage changes came from the Jira-RTL extension only
 	if (area !== "sync") return;

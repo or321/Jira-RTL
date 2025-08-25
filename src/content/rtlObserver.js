@@ -5,6 +5,12 @@ import { Behavior } from "./enums/Behavior";
 let observer = null;
 const activeInputListeners = new Map();
 
+/**
+ * Processes a single element against all observer rules.
+ * If it matches a rule, the element is handled according to that rule.
+ *
+ * @param {HTMLElement} el - The DOM element to process.
+ */
 function processMatchingElement(el) {
 	for (const observerRule of observerRules) {
 		if (el.matches(observerRule.compiledSelector)) {
@@ -14,6 +20,12 @@ function processMatchingElement(el) {
 	}
 }
 
+/**
+ * Handles a newly created DOM node by checking if it matches
+ * or contains elements that match observer rules.
+ *
+ * @param {HTMLElement} node - The newly added DOM node.
+ */
 function processCreatedNode(node) {
 	if (node.matches(combinedSelector)) {
 		processMatchingElement(node);
@@ -23,6 +35,13 @@ function processCreatedNode(node) {
 	node.querySelectorAll(combinedSelector).forEach(processMatchingElement);
 }
 
+/**
+ * Handles a text mutation by walking up the DOM tree until it
+ * finds a matching content-editable rule. Text mutation is any change inside
+ * a text node.
+ *
+ * @param {Text} el - The text node that was changed.
+ */
 function processTextMutation(el) {
 	if (!el) return;
 
@@ -45,15 +64,19 @@ function processTextMutation(el) {
 	}
 }
 
+/**
+ * Handles all mutation records observed by the MutationObserver.
+ *
+ * @param {MutationRecord[]} mutations - List of DOM mutations.
+ */
 function handleMutations(mutations) {
 	for (const mutation of mutations) {
 		//console.log(mutation);
 
 		if (mutation.type === 'childList') {
+			// Process newly added nodes
 			mutation.addedNodes.forEach(node => {
-				if (!(node instanceof Element || node instanceof Text)) return;
-
-				if (node instanceof Element) {
+				if (node instanceof HTMLElement) {
 					processCreatedNode(node);
 				}
 				else if (node instanceof Text) {
@@ -63,16 +86,24 @@ function handleMutations(mutations) {
 		}
 
 		else if (mutation.type === 'characterData') {
+			// Process updated text nodes
 			processTextMutation(mutation.target);
 		}
 	}
 }
 
+/**
+ * Processes an HTML element according to the specified observer rule.
+ * For input elements, add an input event listener to detect changes in the element text.
+ *
+ * @param {HTMLElement} el - The element to process.
+ * @param {import("./observerRules.js").ObserverRule} observerRule - The rule describing how to handle the element.
+ */
 function processElement(el, observerRule) {
 	let text;
-
+	
 	switch (observerRule.behavior) {
-		case Behavior.DEFAULT:
+		case Behavior.TEXT:
 		case Behavior.CONTENT_EDITABLE:
 			const target = observerRule.resolveTarget(el);
 			text = observerRule.resolveText(target);
@@ -82,7 +113,7 @@ function processElement(el, observerRule) {
 
 		case Behavior.INPUT:
 
-			if (activeInputListeners.has(el)) return; // already attached
+			if (activeInputListeners.has(el)) return; // Input listener already attached to the current element
 
 			const inputHandler = (event) => {
 				setDirection(event.target, observerRule.resolveText(event.target));
@@ -101,6 +132,10 @@ function processElement(el, observerRule) {
 	}
 }
 
+/**
+ * Performs a one-time scan of the DOM to process
+ * all existing matching elements.
+ */
 function runScan() {
 	setTimeout(() => {
 		document.querySelectorAll(combinedSelector).forEach(el => {
@@ -114,6 +149,10 @@ function runScan() {
 	}, 0);
 }
 
+/**
+ * Initializes the RTL observer. Starts listening to DOM mutations
+ * and runs an initial scan for existing elements.
+ */
 function initialize() {
 	if (observer) return; // already initialized
 
@@ -127,10 +166,13 @@ function initialize() {
 		characterData: true,
 	});
 
-	// Initial pass for existing nodes
 	runScan();
 }
 
+/**
+ * Cleans up the observer by disconnecting it, removing
+ * all event listeners, and clearing applied RTL styles.
+ */
 function cleanup() {
 	if (observer) {
 		observer.disconnect();
@@ -146,6 +188,9 @@ function cleanup() {
 	document.querySelectorAll(JIRA_RTL_APPLIED_SELECTOR).forEach(removeRTL);
 }
 
+/**
+ * Public API for the RTL observer.
+ */
 export const rtlObserver = {
 	initialize,
 	cleanup,

@@ -1,10 +1,10 @@
 /**
- * Enum representing strategies for determining the text content for which to check RTL
+ * Enum representing strategies for determining the text content for which to check for RTL characters
  * 
  * @readonly
  * @enum {(el: HTMLElement) => string | null}
  */
-export const ResolveText = {
+export const TextResolvingStrategy = {
 	/**
 	 * Text content is determined by the element "textContent" property - which includes hidden text nodes as well
 	 * @param {HTMLElement} el
@@ -21,7 +21,7 @@ export const ResolveText = {
 
 	/**
 	 * Text content is calculated dynamically by iterating over all child elements with a TreeWalker.
-	 * Excludes text inside certain elements (like <pre> or <code>) based on a CSS selector.
+	 * Excludes text inside certain elements (like "pre" or "code") based on a CSS selector.
 	 *
 	 * @param {HTMLElement} el - The root element to scan for text nodes.
 	 * @param {Object} [options] - Optional settings.
@@ -63,6 +63,8 @@ export const ResolveText = {
 			false
 		);
 
+
+		// For performance - it's faster to build a string from an array of strings, than doing string concatenation
 		const textChunks = [];
 		let node = walker.nextNode();
 		while (node) {

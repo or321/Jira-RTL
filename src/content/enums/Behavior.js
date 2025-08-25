@@ -6,9 +6,9 @@
  */
 export const Behavior = {
 	/** For general text elements */
-	DEFAULT: 'default',
+	TEXT: 'TEXT',
 	/** For input and textarea elements */
-	INPUT: 'input',
+	INPUT: 'INPUT',
 	/** For elements with content editor */
-	CONTENT_EDITABLE: 'content_editable',
+	CONTENT_EDITABLE: 'CONTENT_EDITABLE',
 };

@@ -4,7 +4,7 @@
  * @readonly
  * @enum {(el: HTMLElement) => HTMLElement | null}
  */
-export const ResolveTarget = {
+export const TargetResolvingStrategy = {
 	/**
 	 * Apply RTL directly to the matched element.
 	 * @param {HTMLElement} el

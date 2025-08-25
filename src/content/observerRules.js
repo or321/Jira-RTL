@@ -1,11 +1,20 @@
 import { Behavior } from "./enums/Behavior";
-import { ResolveTarget } from "./enums/ResolveTarget";
-import { ResolveText } from "./enums/ResolveText";
+import { TargetResolvingStrategy } from "./enums/TargetResolvingStrategy";
+import { TextResolvingStrategy } from "./enums/TextResolvingStrategy";
+
+/**
+ * @typedef {Object} ObserverRule
+ * @property {string} selectors - CSS selectors to match an element
+ * @property {Behavior} behavior - Type of behavior to apply (TEXT, INPUT, CONTENT_EDITABLE)
+ * @property {(el: HTMLElement) => HTMLElement} resolveTarget - Function to find the target element for applying RTL
+ * @property {(el: HTMLElement) => string} resolveText - Function to extract text for direction detection
+ * @property {string} compiledSelector - Precompiled CSS selector which combines all defined selectors
+ */
 
 /**
  * Configuration of rules for matching elements to apply RTL on, and their associated behavior strategy.
  * 
- * @type {Array<{ selectors: string[], compiledSelector: string, behavior: Behavior, resolveTarget: ResolveTarget, resolveText: ResolveText }>}
+ * @type {Array<{ selectors: string[], compiledSelector: string, behavior: Behavior, resolveTarget: TargetResolvingStrategy, resolveText: TextResolvingStrategy }>}
  */
 export const observerRules = [
 	/* Simple elements where RTL is applied directly */
@@ -64,9 +73,9 @@ export const observerRules = [
 			// Tooltips
 			'.atlaskit-portal-container [role="tooltip"]',
 		],
-		behavior: Behavior.DEFAULT,
-		resolveTarget: ResolveTarget.SELF,
-		resolveText: ResolveText.TEXT_CONTENT
+		behavior: Behavior.TEXT,
+		resolveTarget: TargetResolvingStrategy.SELF,
+		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
 
 	/* Issues filter view - issues summary */
@@ -74,9 +83,9 @@ export const observerRules = [
 		selectors: [
 			'table[data-vc="issue-table"] [data-testid="native-issue-table.common.ui.issue-cells.issue-summary.issue-summary-cell"]'
 		],
-		behavior: Behavior.DEFAULT,
+		behavior: Behavior.TEXT,
 		resolveTarget: el => el.closest('[data-testid="issue-field-inline-edit-read-view-container.ui.container"]'),
-		resolveText: ResolveText.TEXT_CONTENT
+		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
 
 	/* List view - issues summary */
@@ -85,9 +94,9 @@ export const observerRules = [
 			'[data-testid="business-list.ui.list-view.base-table.base-table-with-analytics"] [data-testid="business-list.ui.list-view.summary-cell"]',
 			'[data-testid="business-list.ui.list-view.base-table.base-table-with-analytics"] [data-testid="smart-element-link"]'
 		],
-		behavior: Behavior.DEFAULT,
+		behavior: Behavior.TEXT,
 		resolveTarget: el => el.closest('[data-testid="business-list.ui.list-view.text-cell.text-cell-wrapper"]'),
-		resolveText: ResolveText.TEXT_CONTENT
+		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
 
 	/* Backlog view - issues summary */
@@ -95,9 +104,9 @@ export const observerRules = [
 		selectors: [
 			'[data-testid^="software-backlog.card-list.id"] [data-testid="software-backlog.card-list.card.card-contents.summary"]'
 		],
-		behavior: Behavior.DEFAULT,
-		resolveTarget: ResolveTarget.PARENT,
-		resolveText: ResolveText.TEXT_CONTENT
+		behavior: Behavior.TEXT,
+		resolveTarget: TargetResolvingStrategy.PARENT,
+		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
 
 	/* Timeline view - epics titles */
@@ -105,9 +114,9 @@ export const observerRules = [
 		selectors: [
 			'[data-testid="sr-timeline"] [data-testid="roadmap.timeline-table-kit.ui.list-item-content.summary.title"]'
 		],
-		behavior: Behavior.DEFAULT,
-		resolveTarget: ResolveTarget.PARENT,
-		resolveText: ResolveText.TEXT_CONTENT
+		behavior: Behavior.TEXT,
+		resolveTarget: TargetResolvingStrategy.PARENT,
+		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
 
 	/* Header of an issue-relationship table */
@@ -115,9 +124,9 @@ export const observerRules = [
 		selectors: [
 			'[data-testid="issue.issue-view.views.issue-base.content.issue-links.issue-links-view.relationship-heading"]'
 		],
-		behavior: Behavior.DEFAULT,
-		resolveTarget: ResolveTarget.PARENT,
-		resolveText: ResolveText.TEXT_CONTENT
+		behavior: Behavior.TEXT,
+		resolveTarget: TargetResolvingStrategy.PARENT,
+		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
 
 	/* Title of issues in the modal dialog of search results */
@@ -125,9 +134,9 @@ export const observerRules = [
 		selectors: [
 			'[data-test-id="search-dialog-dialog-wrapper"] [data-vc="search-result-section"] .SearchDialogResultTitle'
 		],
-		behavior: Behavior.DEFAULT,
-		resolveTarget: ResolveTarget.PARENT,
-		resolveText: ResolveText.TEXT_CONTENT
+		behavior: Behavior.TEXT,
+		resolveTarget: TargetResolvingStrategy.PARENT,
+		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
 
 	/* Title of issue in a hover-card */
@@ -135,9 +144,9 @@ export const observerRules = [
 		selectors: [
 			'[data-testid="hover-card"] [data-smart-element="Title"]'
 		],
-		behavior: Behavior.DEFAULT,
+		behavior: Behavior.TEXT,
 		resolveTarget: el => el.closest('[data-testid="smart-element-group"]'),
-		resolveText: ResolveText.TEXT_CONTENT
+		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
 
 	/* Description of issue in a hover-card */
@@ -145,9 +154,9 @@ export const observerRules = [
 		selectors: [
 			'[data-testid="hover-card"] [data-testid="smart-element-text"]'
 		],
-		behavior: Behavior.DEFAULT,
-		resolveTarget: ResolveTarget.PARENT,
-		resolveText: ResolveText.TEXT_CONTENT
+		behavior: Behavior.TEXT,
+		resolveTarget: TargetResolvingStrategy.PARENT,
+		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
 
 	/* Issues in the "Work" page of a user */
@@ -155,9 +164,9 @@ export const observerRules = [
 		selectors: [
 			'[data-testid="recent-work-component"] [data-testid="objectName"]'
 		],
-		behavior: Behavior.DEFAULT,
-		resolveTarget: ResolveTarget.PARENT,
-		resolveText: ResolveText.TEXT_CONTENT
+		behavior: Behavior.TEXT,
+		resolveTarget: TargetResolvingStrategy.PARENT,
+		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
 
 	/* Editable Fields with content editor */
@@ -166,8 +175,8 @@ export const observerRules = [
 			'[id="ak-editor-textarea"][contenteditable="true"]',
 		],
 		behavior: Behavior.CONTENT_EDITABLE,
-		resolveTarget: ResolveTarget.SELF,
-		resolveText: el => ResolveText.TREE_WALKER(el)
+		resolveTarget: TargetResolvingStrategy.SELF,
+		resolveText: el => TextResolvingStrategy.TREE_WALKER(el)
 	},
 
 	/* Input fields */
@@ -192,8 +201,8 @@ export const observerRules = [
 			'.atlaskit-portal-container [id^=":r"][data-ds--level="1"] input[data-ds--text-field--input="true"]',
 		],
 		behavior: Behavior.INPUT,
-		resolveTarget: ResolveTarget.SELF,
-		resolveText: ResolveText.VALUE
+		resolveTarget: TargetResolvingStrategy.SELF,
+		resolveText: TextResolvingStrategy.VALUE
 	},
 ];
 
@@ -204,7 +213,7 @@ observerRules.forEach(rule => {
 
 /**
  * Combined css selector for all the observer rules items.
- * Used as fast check to decide if an element is matched, before processing it.
+ * Used as fast check to decide if an element matches any of the rules, before processing it.
  */
 export const combinedSelector = observerRules
 	.flatMap(target => target.selectors)
