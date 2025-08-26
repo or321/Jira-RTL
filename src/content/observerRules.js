@@ -1,18 +1,18 @@
-import { Behavior } from "./enums/Behavior";
+import { ElementType } from "./enums/ElementType";
 import { TargetResolvingStrategy } from "./enums/TargetResolvingStrategy";
 import { TextResolvingStrategy } from "./enums/TextResolvingStrategy";
 
 /**
  * @typedef {Object} ObserverRule
  * @property {string} selectors - CSS selectors to match an element
- * @property {Behavior} behavior - Type of behavior to apply (TEXT, INPUT, CONTENT_EDITABLE)
+ * @property {ElementType} elementType - Type of the element to match (TEXT, INPUT, CONTENT_EDITABLE)
  * @property {(el: HTMLElement) => HTMLElement} resolveTarget - Function to find the target element for applying RTL
  * @property {(el: HTMLElement) => string} resolveText - Function to extract text for direction detection
  * @property {string} compiledSelector - Precompiled CSS selector which combines all defined selectors
  */
 
 /**
- * Configuration of rules for matching elements to apply RTL on, and their associated behavior strategy.
+ * Configuration of rules for matching elements to apply RTL on, and their associated behavior strategies.
  * 
  * @type {Array<ObserverRule>}
  */
@@ -73,7 +73,7 @@ export const observerRules = [
 			// Tooltips
 			'.atlaskit-portal-container [role="tooltip"]',
 		],
-		behavior: Behavior.TEXT,
+		elementType: ElementType.TEXT,
 		resolveTarget: TargetResolvingStrategy.SELF,
 		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
@@ -83,7 +83,7 @@ export const observerRules = [
 		selectors: [
 			'table[data-vc="issue-table"] [data-testid="native-issue-table.common.ui.issue-cells.issue-summary.issue-summary-cell"]'
 		],
-		behavior: Behavior.TEXT,
+		elementType: ElementType.TEXT,
 		resolveTarget: el => el.closest('[data-testid="issue-field-inline-edit-read-view-container.ui.container"]'),
 		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
@@ -94,7 +94,7 @@ export const observerRules = [
 			'[data-testid="business-list.ui.list-view.base-table.base-table-with-analytics"] [data-testid="business-list.ui.list-view.summary-cell"]',
 			'[data-testid="business-list.ui.list-view.base-table.base-table-with-analytics"] [data-testid="smart-element-link"]'
 		],
-		behavior: Behavior.TEXT,
+		elementType: ElementType.TEXT,
 		resolveTarget: el => el.closest('[data-testid="business-list.ui.list-view.text-cell.text-cell-wrapper"]'),
 		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
@@ -104,7 +104,7 @@ export const observerRules = [
 		selectors: [
 			'[data-testid^="software-backlog.card-list.id"] [data-testid="software-backlog.card-list.card.card-contents.summary"]'
 		],
-		behavior: Behavior.TEXT,
+		elementType: ElementType.TEXT,
 		resolveTarget: TargetResolvingStrategy.PARENT,
 		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
@@ -114,7 +114,7 @@ export const observerRules = [
 		selectors: [
 			'[data-testid="sr-timeline"] [data-testid="roadmap.timeline-table-kit.ui.list-item-content.summary.title"]'
 		],
-		behavior: Behavior.TEXT,
+		elementType: ElementType.TEXT,
 		resolveTarget: TargetResolvingStrategy.PARENT,
 		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
@@ -124,7 +124,7 @@ export const observerRules = [
 		selectors: [
 			'[data-testid="issue.issue-view.views.issue-base.content.issue-links.issue-links-view.relationship-heading"]'
 		],
-		behavior: Behavior.TEXT,
+		elementType: ElementType.TEXT,
 		resolveTarget: TargetResolvingStrategy.PARENT,
 		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
@@ -134,7 +134,7 @@ export const observerRules = [
 		selectors: [
 			'[data-test-id="search-dialog-dialog-wrapper"] [data-vc="search-result-section"] .SearchDialogResultTitle'
 		],
-		behavior: Behavior.TEXT,
+		elementType: ElementType.TEXT,
 		resolveTarget: TargetResolvingStrategy.PARENT,
 		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
@@ -144,7 +144,7 @@ export const observerRules = [
 		selectors: [
 			'[data-testid="hover-card"] [data-smart-element="Title"]'
 		],
-		behavior: Behavior.TEXT,
+		elementType: ElementType.TEXT,
 		resolveTarget: el => el.closest('[data-testid="smart-element-group"]'),
 		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
@@ -154,7 +154,7 @@ export const observerRules = [
 		selectors: [
 			'[data-testid="hover-card"] [data-testid="smart-element-text"]'
 		],
-		behavior: Behavior.TEXT,
+		elementType: ElementType.TEXT,
 		resolveTarget: TargetResolvingStrategy.PARENT,
 		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
@@ -164,7 +164,7 @@ export const observerRules = [
 		selectors: [
 			'[data-testid="recent-work-component"] [data-testid="objectName"]'
 		],
-		behavior: Behavior.TEXT,
+		elementType: ElementType.TEXT,
 		resolveTarget: TargetResolvingStrategy.PARENT,
 		resolveText: TextResolvingStrategy.TEXT_CONTENT
 	},
@@ -174,7 +174,7 @@ export const observerRules = [
 		selectors: [
 			'[id="ak-editor-textarea"][contenteditable="true"]',
 		],
-		behavior: Behavior.CONTENT_EDITABLE,
+		elementType: ElementType.CONTENT_EDITABLE,
 		resolveTarget: TargetResolvingStrategy.SELF,
 		resolveText: el => TextResolvingStrategy.TREE_WALKER(el)
 	},
@@ -200,7 +200,7 @@ export const observerRules = [
 			// Filter fields in sidebar modal dialogs
 			'.atlaskit-portal-container [id^=":r"][data-ds--level="1"] input[data-ds--text-field--input="true"]',
 		],
-		behavior: Behavior.INPUT,
+		elementType: ElementType.INPUT,
 		resolveTarget: TargetResolvingStrategy.SELF,
 		resolveText: TextResolvingStrategy.VALUE
 	},

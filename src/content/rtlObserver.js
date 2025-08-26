@@ -1,6 +1,6 @@
 import { setDirection, removeRTL, JIRA_RTL_APPLIED_SELECTOR } from "./rtlUtils";
 import { observerRules, combinedSelector } from './observerRules';
-import { Behavior } from "./enums/Behavior";
+import { ElementType } from "./enums/ElementType.js";
 
 let observer = null;
 const activeInputListeners = new Map();
@@ -50,7 +50,7 @@ function processTextMutation(el) {
 	while (parentEl) {
 		if (parentEl.matches(combinedSelector)) {
 			for (const observerRule of observerRules) {
-				if (observerRule.behavior === Behavior.CONTENT_EDITABLE
+				if (observerRule.elementType === ElementType.CONTENT_EDITABLE
 					&&
 					parentEl.matches(observerRule.compiledSelector)
 				) {
@@ -102,16 +102,16 @@ function handleMutations(mutations) {
 function processElement(el, observerRule) {
 	let text;
 	
-	switch (observerRule.behavior) {
-		case Behavior.TEXT:
-		case Behavior.CONTENT_EDITABLE:
+	switch (observerRule.elementType) {
+		case ElementType.TEXT:
+		case ElementType.CONTENT_EDITABLE:
 			const target = observerRule.resolveTarget(el);
 			text = observerRule.resolveText(target);
 			setDirection(target, text);
 
 			break;
 
-		case Behavior.INPUT:
+		case ElementType.INPUT:
 
 			if (activeInputListeners.has(el)) return; // Input listener already attached to the current element
 

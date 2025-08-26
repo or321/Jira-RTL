@@ -4,7 +4,7 @@
  * @readonly
  * @enum {string}
  */
-export const Behavior = {
+export const ElementType = {
 	/** For general text elements */
 	TEXT: 'TEXT',
 	/** For input and textarea elements */
