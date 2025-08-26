@@ -1,9 +1,6 @@
 {
   "type": "module",
-  "name": "jira-rtl",
-  "version": "1.0.0",
-  "description": "",
-  "main": "jiraRTL.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "zip-dist": "node zip-dist.js",
@@ -14,17 +11,6 @@
     "dev:popup": "vite build --watch --mode popup",
     "dev": "npm-run-all dev:content dev:popup"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/or321/Jira-RTL.git"
-  },
-  "keywords": [],
-  "author": "Or Liran",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/or321/Jira-RTL/issues"
-  },
-  "homepage": "https://github.com/or321/Jira-RTL#readme",
   "dependencies": {
     "deepmerge": "^4.3.1",
     "webextension-polyfill": "^0.12.0"

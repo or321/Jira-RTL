@@ -1,4 +1,4 @@
-/* Script to zip automatically zip the dist folder, and create a ready-to-deploy version */
+/* Script to automatically zip the dist folder, and create a ready-to-deploy version */
 
 import fs from 'fs';
 import archiver from 'archiver';
