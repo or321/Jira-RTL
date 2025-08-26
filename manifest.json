@@ -1,7 +1,7 @@
 {
 	"name": "Jira RTL",
 	"description": "Automatically aligns RTL text in Atlassian Jira.",
-	"version": "0.5.7",
+	"version": "1.0.0",
 	"manifest_version": 3,
 	"icons": {
 		"16": "images/icon-16.png",
