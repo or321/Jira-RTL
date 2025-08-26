@@ -6,7 +6,7 @@ import merge from "deepmerge";
  */
 
 /** @type {ExtensionSettings} */
-export const DEFAULT_SETTINGS = {
+const DEFAULT_SETTINGS = {
 	enabled: true
 };
 

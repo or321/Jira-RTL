@@ -14,7 +14,7 @@ import { TextResolvingStrategy } from "./enums/TextResolvingStrategy";
 /**
  * Configuration of rules for matching elements to apply RTL on, and their associated behavior strategy.
  * 
- * @type {Array<{ selectors: string[], compiledSelector: string, behavior: Behavior, resolveTarget: TargetResolvingStrategy, resolveText: TextResolvingStrategy }>}
+ * @type {Array<ObserverRule>}
  */
 export const observerRules = [
 	/* Simple elements where RTL is applied directly */

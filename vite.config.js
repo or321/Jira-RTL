@@ -6,7 +6,7 @@ const contentConfig = {
 	build: {
 		outDir: 'dist',
 		emptyOutDir: true, // only the first build empties the output folder
-		target: 'es2020',
+		target: 'es2022',
 		rollupOptions: {
 			input: resolve(__dirname, 'src/content/main.js'),
 			output: {
@@ -36,7 +36,7 @@ const popupConfig = {
 	build: {
 		outDir: 'dist',
 		emptyOutDir: false, // The output folder is already emptied in the first config
-		target: 'es2020',
+		target: 'es2022',
 		rollupOptions: {
 			input: resolve(__dirname, 'popup.html'),
 			output: {
