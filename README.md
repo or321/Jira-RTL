@@ -3,7 +3,7 @@
 A lightweight browser extension that improves the display of **Right-to-Left (RTL) languages in Jira Cloud**.  
 It automatically adjusts layouts and styles, so that Jira pages look natural when working in Hebrew, Arabic, and other RTL languages.
 
-![Screenshot of Jira RTL Extension](promotion/promo1.png)
+![Screenshot of Jira RTL Extension](promotion/card-screenshot.png)
 
 ---
 
