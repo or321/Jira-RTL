@@ -39,5 +39,10 @@
 	],
 	"permissions": [
 		"storage"
-	]
+	],
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "@jira-rtl.Or-Liran"
+		}
+	}
 }
