@@ -70,8 +70,11 @@ export const observerRules = [
 			// Attachments headers
 			'[data-testid="issue-view-base.content.attachment.grid-view.ui.components.media-card.title-box-header"]',
 
-			// Tooltips
+			// General tooltips
 			'.atlaskit-portal-container [role="tooltip"]',
+
+			// Tooltips in filter view
+			'.atlaskit-portal-container [data-testid="hover-popover.ui.popup-content.hover-popover-content"]',
 		],
 		elementType: ElementType.TEXT,
 		resolveTarget: TargetResolvingStrategy.SELF,
