@@ -27,6 +27,12 @@ export const observerRules = [
 			// This includes jira issue description, comments in the issue activity section, and more
 			'.ak-renderer-document p',
 			'.ak-renderer-document li',
+			'.ak-renderer-document h1',
+			'.ak-renderer-document h2',
+			'.ak-renderer-document h3',
+			'.ak-renderer-document h4',
+			'.ak-renderer-document h5',
+			'.ak-renderer-document h6',
 
 			// Action items inside an editable element (in view mode)
 			'.ak-renderer-document [data-task-list-local-id]',
