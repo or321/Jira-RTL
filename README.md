@@ -18,7 +18,7 @@ It automatically adjusts layouts and styles, so that Jira pages look natural whe
 You can install the extension directly from your browser's extension store:
 
 [Chrome Web Store](https://chromewebstore.google.com/detail/jira-rtl/mnllbchpmnjgjcamlaghhefmimpkgbad)  
-Microsoft Edge Web Store (coming soon)  
+[Microsoft Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/jira-rtl/jibdipmakcaeijdiojcoplcmcaaebefe)  
 Firefox Add-ons (coming soon)
 
 If you want to install the extension manually from source code (for development purposes):
