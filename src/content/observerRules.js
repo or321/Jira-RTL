@@ -213,6 +213,16 @@ export const observerRules = [
 		resolveTarget: TargetResolvingStrategy.SELF,
 		resolveText: TextResolvingStrategy.VALUE
 	},
+
+	/* Issue names in editable state inside issues tables */
+	{
+		selectors: [
+			'tr[data-testid="native-issue-table.ui.issue-row"] input[data-ds--text-field--input="true"]',
+		],
+		elementType: ElementType.INPUT,
+		resolveTarget: el => el.closest('form[role="presentation"]'),
+		resolveText: TextResolvingStrategy.VALUE
+	}
 ];
 
 // Build a combined css selector for each individual observer rule
