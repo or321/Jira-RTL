@@ -30,11 +30,11 @@ export const TextResolvingStrategy = {
 	 *
 	 * @example
 	 * // Default behavior, skips <pre> and <code>
-	 * const text = ResolveText.TREE_WALKER(el);
+	 * const text = TextResolvingStrategy.TREE_WALKER(el);
 	 *
 	 * @example
 	 * // Custom excluded elements
-	 * const text = ResolveText.TREE_WALKER(el, { elementsToExclude: "pre, code, blockquote" });
+	 * const text = TextResolvingStrategy.TREE_WALKER(el, { elementsToExclude: "pre, code, blockquote" });
 	 */
 	TREE_WALKER: (el, { elementsToExclude = "pre, code" } = {}) => {
 		// Pre-calculate and store all excluded inner elements of the given root element, for performance
