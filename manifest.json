@@ -42,7 +42,12 @@
 	],
 	"browser_specific_settings": {
 		"gecko": {
-			"id": "@jira-rtl.Or-Liran"
+			"id": "@jira-rtl.Or-Liran",
+			"data_collection_permissions": {
+				"required": [
+					"none"
+				]
+			}
 		}
 	}
 }
