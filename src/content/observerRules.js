@@ -208,6 +208,9 @@ export const observerRules = [
 
 			// Filter fields in sidebar modal dialogs
 			'.atlaskit-portal-container [id^=":r"][data-ds--level="1"] input[data-ds--text-field--input="true"]',
+
+			// Summary field in "Clone issue" modal dialog
+			'[data-testid="clone-issue-dialog.ui.modal-dialog--body"] input[data-ds--text-field--input="true"]',
 		],
 		elementType: ElementType.INPUT,
 		resolveTarget: TargetResolvingStrategy.SELF,
