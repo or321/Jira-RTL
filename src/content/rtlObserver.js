@@ -101,11 +101,12 @@ function handleMutations(mutations) {
  */
 function processElement(el, observerRule) {
 	let text;
-	
+	let target;
+
 	switch (observerRule.elementType) {
 		case ElementType.TEXT:
 		case ElementType.CONTENT_EDITABLE:
-			const target = observerRule.resolveTarget(el);
+			target = observerRule.resolveTarget(el);
 			text = observerRule.resolveText(target);
 			setDirection(target, text);
 
@@ -115,15 +116,20 @@ function processElement(el, observerRule) {
 
 			if (activeInputListeners.has(el)) return; // Input listener already attached to the current element
 
+
 			const inputHandler = (event) => {
-				setDirection(event.target, observerRule.resolveText(event.target));
+				setDirection(
+					observerRule.resolveTarget(event.target),
+					observerRule.resolveText(event.target)
+				);
 			};
 
 			el.addEventListener('input', inputHandler);
 			activeInputListeners.set(el, inputHandler);
 
+			target = observerRule.resolveTarget(el);
 			text = observerRule.resolveText(el);
-			setDirection(el, text);
+			setDirection(target, text);
 
 			break;
 
