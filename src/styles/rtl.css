@@ -102,7 +102,13 @@
 	}
 
 	/* Changing layout of tables inside editable elements with text editor, when combined with RTL */
-	table[data-testid="renderer-table"]:has(&){
+	table[data-testid="renderer-table"]:has(&) {
 		direction: rtl;
+	}
+
+	/* Options list of a "search issue" link section */
+	[data-testid="issue-link-search-select--listbox"] &[data-testid^="issue-link-search-select--option"]>span>span:nth-of-type(1) {
+		padding-right: unset !important;
+		padding-left: var(--ds-space-100, 8px);
 	}
 }

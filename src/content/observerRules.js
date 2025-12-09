@@ -76,6 +76,9 @@ export const observerRules = [
 			// Attachments headers
 			'[data-testid="issue-view-base.content.attachment.grid-view.ui.components.media-card.title-box-header"]',
 
+			// Options list of a "search issue" link section
+			'[data-testid="issue-link-search-select--listbox"] [data-testid^="issue-link-search-select--option"]',
+
 			// General tooltips
 			'.atlaskit-portal-container [role="tooltip"]',
 
@@ -211,6 +214,9 @@ export const observerRules = [
 
 			// Summary field in "Clone issue" modal dialog
 			'[data-testid="clone-issue-dialog.ui.modal-dialog--body"] input[data-ds--text-field--input="true"]',
+
+			// Filter field of a "search issue" link section
+			'[data-testid="issue-link-search-select--input"]',
 		],
 		elementType: ElementType.INPUT,
 		resolveTarget: TargetResolvingStrategy.SELF,
