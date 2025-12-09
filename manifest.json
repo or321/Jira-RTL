@@ -1,7 +1,7 @@
 {
 	"name": "Jira RTL",
 	"description": "Automatically aligns RTL text in Atlassian Jira.",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"manifest_version": 3,
 	"icons": {
 		"16": "icons/icon-16.png",
@@ -18,7 +18,8 @@
 	"content_scripts": [
 		{
 			"matches": [
-				"https://*.atlassian.net/*"
+				"https://*.atlassian.net/*",
+				"https://home.atlassian.com/*"
 			],
 			"js": [
 				"assets/browser-polyfill.min.js",
@@ -30,7 +31,8 @@
 	"web_accessible_resources": [
 		{
 			"matches": [
-				"https://*.atlassian.net/*"
+				"https://*.atlassian.net/*",
+				"https://home.atlassian.com/*"
 			],
 			"resources": [
 				"assets/jira-rtl.css"
