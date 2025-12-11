@@ -88,16 +88,28 @@ async function initialize() {
 
 runWhenReady(initialize);
 
-// run a post-load scan in case the first initial scan missed something
-window.addEventListener("load", () => {
-	setTimeout(async () => {
-		const settings = await loadSettings();
+async function sleep(milliseconds) {
+	return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
 
-		if (settings.enabled) {
-			console.log("Jira_RTL - running a post-load scan");
-			rtlObserver.runScan();
-		}
-	}, 4000);
+// Run 4 delayed post-load scans in case the first initial scan missed something
+window.addEventListener("load", async () => {
+    for (let i = 1; i <= 4; i++) {
+        await sleep(1000);
+
+        // Load fresh settings each time
+        const settings = await loadSettings();
+
+        if (!settings.enabled) {
+            console.log("Jira_RTL - stopped (disabled during post-load scans)");
+            break;
+        }
+
+        console.log(`Jira_RTL - running post-load scan ${i}/4`);
+        rtlObserver.runScan();
+    }
+
+    console.log("Jira_RTL - post-load scans finished");
 });
 
 /**
@@ -108,7 +120,7 @@ browser.storage.onChanged.addListener(async (changes, area) => {
 	// Ensure the storage changes came from the Jira-RTL extension only
 	if (area !== "sync") return;
 	if (!changes.Jira_RTL_settings) return;
-	
+
 	const settings = await loadSettings();
 
 	applySettings(settings);
