@@ -84,6 +84,12 @@ export const observerRules = [
 
 			// Tooltips in filter view
 			'.atlaskit-portal-container [data-testid="hover-popover.ui.popup-content.hover-popover-content"]',
+
+			// Titles of Confluence pages
+			'[data-testid="title-text"]',
+
+			// Titles of Confluence pages in editor mode
+			'[data-test-id="editor-title"]',
 		],
 		elementType: ElementType.TEXT,
 		resolveTarget: TargetResolvingStrategy.SELF,
