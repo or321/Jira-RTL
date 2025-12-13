@@ -111,4 +111,30 @@
 		padding-right: unset !important;
 		padding-left: var(--ds-space-100, 8px);
 	}
+
+	/* Cards titles in Sprint or Kanban board view */
+	&[data-component-selector="platform-card.ui.card.card-content.content-section"] {
+
+		/* Revert direction on the container if there is an edit button.
+		In that case, apply RTL direction directly on the text */
+		&:has([data-testid="issue-field-single-line-text-readview-card.ui.single-line-text.container.box"]) {
+			direction: ltr !important;
+		}
+
+		& [data-testid="issue-field-single-line-text-readview-card.ui.single-line-text.container.box"] {
+			direction: rtl;
+
+			/* Edit icon near the cards title */
+			&>span {
+				left: 0;
+				right: unset;
+			}
+			
+			&>span>span {
+				transform: translate(-30px, 4px);
+				left: 0;
+				right: unset;
+			}
+		}
+	}
 }
