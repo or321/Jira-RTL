@@ -62,7 +62,7 @@ export const observerRules = [
 			'.search-results-dashboard-item-issue-table table.issue-table td.summary',
 
 			// Items in sidebar modal dialogs
-			'.atlaskit-portal-container [id^=":r"][data-ds--level="1"] span',
+			'.atlaskit-portal-container [id^="_r"][data-ds--level="1"] span',
 
 			// Epics names inside "lozenge components"
 			'[data-testid="issue-field-parent-switcher.common.ui.epic-lozenge.lozenge--text"]',
@@ -216,7 +216,7 @@ export const observerRules = [
 			'[data-testid="recent-work-component"] [data-testid="recent-work_search-input"]',
 
 			// Filter fields in sidebar modal dialogs
-			'.atlaskit-portal-container [id^=":r"][data-ds--level="1"] input[data-ds--text-field--input="true"]',
+			'.atlaskit-portal-container [id^="_r"][data-ds--level="1"] input[data-ds--text-field--input="true"]',
 
 			// Summary field in "Clone issue" modal dialog
 			'[data-testid="clone-issue-dialog.ui.modal-dialog--body"] input[data-ds--text-field--input="true"]',
