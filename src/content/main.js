@@ -1,9 +1,12 @@
 import { loadSettings } from "../utils/settings";
 import { rtlObserver } from "./rtlObserver"
+import { UrlChangeObserver } from "./urlChangeObserver";
 import "../styles/rtl.css"
 
 /** @type {import("../utils/settings").ExtensionSettings | null} */
 let currentSettings = null;
+
+const urlChangeObserver = new UrlChangeObserver(onUrlChanged);
 
 /**
  * Injects the extension stylesheet into the document head, 
@@ -44,9 +47,11 @@ const settingHandlers = {
 		if (newValue) {
 			console.log("Jira_RTL enabled, starting a new scan");
 			rtlObserver.initialize();
+			urlChangeObserver.start();
 		}
 		else {
 			console.log("Jira_RTL disabled, starting cleanup");
+			urlChangeObserver.stop();
 			rtlObserver.cleanup();
 		}
 	},
@@ -83,6 +88,7 @@ async function initialize() {
 	if (settings.enabled) {
 		console.log("Jira_RTL - running initial scan");
 		rtlObserver.initialize();
+		urlChangeObserver.start();
 	}
 }
 
@@ -92,25 +98,42 @@ async function sleep(milliseconds) {
 	return new Promise(resolve => setTimeout(resolve, milliseconds));
 }
 
-// Run 4 delayed post-load scans in case the first initial scan missed something
+async function runPostScans(iterations) {
+	let enabled = true;
+	for (let i = 1; i <= iterations; i++) {
+		await sleep(1000);
+
+		// Load fresh settings each time
+		const settings = await loadSettings();
+
+		if (!settings.enabled) {
+			enabled = false;
+			break;
+		}
+
+		console.log(`Jira_RTL - running post-load scan ${i}/${iterations}`);
+		rtlObserver.runScan();
+	}
+
+	if (enabled) {
+		console.log("Jira_RTL - post-load scans finished");
+	}
+}
+
+// Run 4 delayed scans after the page is fully loaded, in case the first initial scan missed something
 window.addEventListener("load", async () => {
-    for (let i = 1; i <= 4; i++) {
-        await sleep(1000);
-
-        // Load fresh settings each time
-        const settings = await loadSettings();
-
-        if (!settings.enabled) {
-            console.log("Jira_RTL - stopped (disabled during post-load scans)");
-            break;
-        }
-
-        console.log(`Jira_RTL - running post-load scan ${i}/4`);
-        rtlObserver.runScan();
-    }
-
-    console.log("Jira_RTL - post-load scans finished");
+	await runPostScans(4);
 });
+
+async function onUrlChanged() {
+	const settings = await loadSettings();
+	if (!settings.enabled) return;
+
+	console.log("Jira_RTL - URL change detected - running new scan");
+	rtlObserver.runScan();
+
+	await runPostScans(4);
+}
 
 /**
  * Listen for storage changes and re-apply settings
