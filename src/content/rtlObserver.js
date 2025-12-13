@@ -107,7 +107,7 @@ function processElement(el, observerRule) {
 		case ElementType.TEXT:
 		case ElementType.CONTENT_EDITABLE:
 			target = observerRule.resolveTarget(el);
-			text = observerRule.resolveText(target);
+			text = observerRule.resolveText(el);
 			setDirection(target, text);
 
 			break;

@@ -9,7 +9,7 @@ function isRTL(text) {
 	return RTL_REGEX.test(text);
 }
 
-const JIRA_RTL_APPLIED_NAME = 'data-jira-rtl-applied';
+const JIRA_RTL_APPLIED_ATTRIBUTE = 'data-jira-rtl-applied';
 export const JIRA_RTL_APPLIED_SELECTOR = '[data-jira-rtl-applied="true"]';
 
 /**
@@ -17,7 +17,7 @@ export const JIRA_RTL_APPLIED_SELECTOR = '[data-jira-rtl-applied="true"]';
  * @param {HTMLElement} el 
  */
 function applyRTL(el) {
-	el.setAttribute(JIRA_RTL_APPLIED_NAME, "true");
+	el.setAttribute(JIRA_RTL_APPLIED_ATTRIBUTE, "true");
 }
 
 /**
@@ -25,7 +25,7 @@ function applyRTL(el) {
  * @param {HTMLElement} el 
  */
 export function removeRTL(el) {
-	el.removeAttribute(JIRA_RTL_APPLIED_NAME);
+	el.removeAttribute(JIRA_RTL_APPLIED_ATTRIBUTE);
 }
 
 /**
@@ -34,7 +34,7 @@ export function removeRTL(el) {
  * @returns {boolean}
  */
 function rtlAppliedOn(el) {
-	return el.getAttribute(JIRA_RTL_APPLIED_NAME) === "true";
+	return el.getAttribute(JIRA_RTL_APPLIED_ATTRIBUTE) === "true";
 }
 
 /**
